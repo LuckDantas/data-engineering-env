@@ -2,10 +2,9 @@ version: '3.8'
 
 services:
 
-#######################################################################################################################
-####################################################### AIRFLOW #######################################################
-#######################################################################################################################
-
+  #######################################################################################################################
+  # POSTGRES AIRFLOW
+  #######################################################################################################################
   postgres-airflow:
     image: postgres:15
     container_name: postgres-airflow
@@ -20,11 +19,14 @@ services:
     networks:
       - airflow_network
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${AIRFLOW_USER}", "-d", "${AIRFLOW_DB}"]
+      test: [ "CMD", "pg_isready", "-U", "${AIRFLOW_USER}", "-d", "${AIRFLOW_DB}" ]
       interval: 10s
       retries: 5
       start_period: 5s
 
+  #######################################################################################################################
+  # AIRFLOW WEBSERVER
+  #######################################################################################################################
   airflow-webserver:
     image: ${AIRFLOW_IMAGE}
     container_name: airflow-webserver
@@ -42,10 +44,7 @@ services:
       - AIRFLOW__WEBSERVER__DEFAULT_USER_USERNAME=admin
       - AIRFLOW__WEBSERVER__DEFAULT_USER_PASSWORD=admin
     command: >
-      bash -c "
-      airflow db init &&
-      airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin || echo 'Airflow user already exists' &&
-      airflow webserver"
+      bash -c " airflow db init && airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin || echo 'Airflow user already exists' && airflow webserver"
     ports:
       - "8080:8080"
     volumes:
@@ -59,11 +58,14 @@ services:
       - airflow_network
       - link_airflow_dbt_network
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      test: [ "CMD", "curl", "--fail", "http://localhost:8080/health" ]
       interval: 30s
       retries: 3
       start_period: 30s
 
+  #######################################################################################################################
+  # AIRFLOW SCHEDULER
+  #######################################################################################################################
   airflow-scheduler:
     image: ${AIRFLOW_IMAGE}
     container_name: airflow-scheduler
@@ -89,6 +91,9 @@ services:
       - airflow_network
       - link_airflow_dbt_network
 
+  #######################################################################################################################
+  # AIRFLOW WORKER
+  #######################################################################################################################
   airflow-worker:
     image: ${AIRFLOW_IMAGE}
     depends_on:
@@ -117,25 +122,27 @@ services:
     deploy:
       replicas: 3
 
+  #######################################################################################################################
+  # REDIS
+  #######################################################################################################################
   redis:
     image: redis:7
     container_name: redis
     ports:
       - "${REDIS_PORT}:6379"
     volumes:
-    - redis_data:/data
+      - redis_data:/data
     networks:
       - airflow_network
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
       retries: 3
       start_period: 5s
 
-#######################################################################################################################
-####################################################### DBT ###########################################################
-#######################################################################################################################
-
+  #######################################################################################################################
+  # DBT
+  #######################################################################################################################
   dbt:
     image: ghcr.io/dbt-labs/dbt-postgres:1.9.0
     container_name: dbt
@@ -169,12 +176,15 @@ services:
         service ssh start &&
         tail -f /dev/null
       "
-    ports: 
+    ports:
       - "2222:22"
     networks:
       - dbt_network
       - link_airflow_dbt_network
-  
+
+  #######################################################################################################################
+  # POSTGRES DBT
+  #######################################################################################################################
   postgres-dbt:
     image: postgres:15
     container_name: postgres-dbt
@@ -191,11 +201,14 @@ services:
       - dbt_network
       - link_airflow_dbt_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_DBT_USER} -d ${POSTGRES_DBT_DB}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_DBT_USER} -d ${POSTGRES_DBT_DB}" ]
       interval: 10s
       retries: 5
       start_period: 5s
 
+  #######################################################################################################################
+  # DBT DOCS
+  #######################################################################################################################
   dbt-docs:
     image: ghcr.io/dbt-labs/dbt-postgres:1.9.0
     container_name: dbt-docs
@@ -227,16 +240,15 @@ services:
       - dbt_network
       - link_airflow_dbt_network
 
-#######################################################################################################################
-####################################################### SPARK #########################################################
-#######################################################################################################################
-
+  #######################################################################################################################
+  # JUPYTER SPARK
+  #######################################################################################################################
   jupyter-spark:
     image: jupyter/pyspark-notebook:latest
     container_name: jupyter-spark
     environment:
       - JUPYTER_ENABLE_LAB=yes
-      - JUPYTER_TOKEN=spark  # Fixed token for easy local access
+      - JUPYTER_TOKEN=spark # Fixed token for easy local access
     ports:
       - "${JUPYTER_PORT}:8888"
       - "${SPARK_UI_PORT}:4040"
@@ -248,10 +260,9 @@ services:
     user: root # To avoid permission issues with mounted volumes in some setups
     command: start-notebook.sh --NotebookApp.token='spark'
 
-#######################################################################################################################
-####################################################### PGADMIN ######################################################
-#######################################################################################################################
-
+  #######################################################################################################################
+  # PGADMIN
+  #######################################################################################################################
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pgadmin
@@ -275,9 +286,8 @@ services:
       - link_airflow_dbt_network
 
 #######################################################################################################################
-################################################ VOLUMES & NETWORKS ###################################################
+# VOLUMES
 #######################################################################################################################
-
 volumes:
   postgres_airflow_data:
   postgres_dbt_data:
@@ -285,6 +295,9 @@ volumes:
   dbt_ssh_keys:
   pgadmin_data:
 
+    #######################################################################################################################
+    # NETWORKS
+    #######################################################################################################################
 networks:
   airflow_network:
     driver: bridge
