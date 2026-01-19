@@ -56,7 +56,7 @@ jobs:
 
       - name: Run dbt deps and parse (no database connection)
         run: |
-          docker compose run --rm dbt bash -lc "dbt deps && dbt parse"
+          docker compose run --rm --entrypoint bash dbt -lc "dbt deps && dbt parse"
 
   dbt_smoke_dev:
     name: dbt smoke test (dev target)
@@ -76,7 +76,7 @@ jobs:
 
       - name: Wait for postgres-dbt to be ready
         run: |
-          docker compose run --rm dbt bash -lc "
+          docker compose run --rm --entrypoint bash dbt -lc "
             apt-get update &&
             apt-get install -y postgresql-client &&
             until pg_isready -h postgres-dbt -p 5432 -U dbt; do
@@ -87,7 +87,7 @@ jobs:
 
       - name: Run dbt build (dev target)
         run: |
-          docker compose run --rm dbt bash -lc "
+          docker compose run --rm --entrypoint bash dbt -lc "
             dbt deps &&
             dbt build --target dev
           "
