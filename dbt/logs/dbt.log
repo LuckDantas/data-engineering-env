@@ -1,0 +1,786 @@
+[0m00:44:00.212951 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db679eb230>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db679e9a90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db68157fe0>]}
+
+
+============================== 00:44:00.228339 | 5569e547-db65-47c0-be72-3d9084e17b9a ==============================
+[0m00:44:00.228339 [info ] [MainThread]: Running with dbt=1.9.0
+[0m00:44:00.229504 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'version_check': 'True', 'log_path': '/usr/app/logs', 'fail_fast': 'False', 'profiles_dir': '/usr/app', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'invocation_command': 'dbt deps', 'static_parser': 'True', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m00:44:00.484402 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '5569e547-db65-47c0-be72-3d9084e17b9a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db67483e00>]}
+[0m00:44:00.790817 [debug] [MainThread]: Set downloads directory='/tmp/dbt-downloads-48a0fhdy'
+[0m00:44:00.792198 [debug] [MainThread]: Making package index registry request: GET https://hub.getdbt.com/api/v1/index.json
+[0m00:44:01.005669 [debug] [MainThread]: Response from registry index: GET https://hub.getdbt.com/api/v1/index.json 200
+[0m00:44:01.006654 [debug] [MainThread]: Making package registry request: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json
+[0m00:44:01.063984 [debug] [MainThread]: Response from registry: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json 200
+[0m00:44:01.094461 [debug] [MainThread]: Making package registry request: GET https://hub.getdbt.com/api/v1/calogica/dbt_expectations.json
+[0m00:44:01.389817 [debug] [MainThread]: Response from registry: GET https://hub.getdbt.com/api/v1/calogica/dbt_expectations.json 200
+[0m00:44:01.392597 [warn ] [MainThread]: [[33mWARNING[0m]: Deprecated functionality
+The `calogica/dbt_expectations` package is deprecated in favor of
+`metaplane/dbt_expectations`. Please update your `packages.yml` configuration to
+use `metaplane/dbt_expectations` instead.
+[0m00:44:01.393576 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '5569e547-db65-47c0-be72-3d9084e17b9a', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db673ef950>]}
+[0m00:44:01.402266 [debug] [MainThread]: Making package registry request: GET https://hub.getdbt.com/api/v1/calogica/dbt_date.json
+[0m00:44:01.613779 [debug] [MainThread]: Response from registry: GET https://hub.getdbt.com/api/v1/calogica/dbt_date.json 200
+[0m00:44:01.644062 [info ] [MainThread]: Updating lock file in file path: /usr/app/package-lock.yml
+[0m00:44:01.648362 [debug] [MainThread]: Set downloads directory='/tmp/dbt-downloads-nsg48vb1'
+[0m00:44:01.664529 [info ] [MainThread]: Installing dbt-labs/dbt_utils
+[0m00:44:01.997480 [info ] [MainThread]: Installed from version 1.3.0
+[0m00:44:01.998065 [info ] [MainThread]: Updated version available: 1.3.3
+[0m00:44:01.998625 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'package', 'label': '5569e547-db65-47c0-be72-3d9084e17b9a', 'property_': 'install', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db672e3980>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db67322840>]}
+[0m00:44:01.999193 [info ] [MainThread]: Installing calogica/dbt_expectations
+[0m00:44:02.796270 [info ] [MainThread]: Installed from version 0.10.4
+[0m00:44:02.796847 [info ] [MainThread]: Up to date!
+[0m00:44:02.797327 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'package', 'label': '5569e547-db65-47c0-be72-3d9084e17b9a', 'property_': 'install', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db674c4e30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db67792840>]}
+[0m00:44:02.797783 [info ] [MainThread]: Installing calogica/dbt_date
+[0m00:44:02.992389 [info ] [MainThread]: Installed from version 0.10.1
+[0m00:44:02.992915 [info ] [MainThread]: Up to date!
+[0m00:44:02.993386 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'package', 'label': '5569e547-db65-47c0-be72-3d9084e17b9a', 'property_': 'install', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db6745b530>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db6745b320>]}
+[0m00:44:02.993851 [info ] [MainThread]: 
+[0m00:44:02.994317 [info ] [MainThread]: Updates available for packages: ['dbt-labs/dbt_utils']                 
+Update your versions in packages.yml, then run dbt deps
+[0m00:44:02.999006 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_success": true, "command_wall_clock_time": 2.8788638, "process_in_blocks": "8648", "process_kernel_time": 0.44077, "process_mem_max_rss": "95684", "process_out_blocks": "24608", "process_user_time": 2.544768}
+[0m00:44:03.000015 [debug] [MainThread]: Command `dbt deps` succeeded at 00:44:02.999815 after 2.88 seconds
+[0m00:44:03.000487 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db6abf6b10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db674c7470>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x75db680353a0>]}
+[0m00:44:03.000953 [debug] [MainThread]: Flushing usage events
+[0m00:44:03.658904 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m00:44:05.978085 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed623f950>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed5c917f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed5598fb0>]}
+
+
+============================== 00:44:05.983051 | a1ea1e0d-344b-464e-a4df-63c0b78a7532 ==============================
+[0m00:44:05.983051 [info ] [MainThread]: Running with dbt=1.9.0
+[0m00:44:05.983931 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'debug': 'False', 'log_path': '/usr/app/logs', 'version_check': 'True', 'profiles_dir': '/usr/app', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt docs generate', 'log_format': 'default', 'static_parser': 'True', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m00:44:06.307277 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'a1ea1e0d-344b-464e-a4df-63c0b78a7532', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed559ae10>]}
+[0m00:44:06.428089 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'a1ea1e0d-344b-464e-a4df-63c0b78a7532', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed5878e00>]}
+[0m00:44:06.429344 [info ] [MainThread]: Registered adapter: postgres=1.9.0
+[0m00:44:06.650086 [debug] [MainThread]: checksum: c99e828bba267739642b5a3ce85f17518764ea526e0e6c4fdc649171c1a66bff, vars: {}, profile: , target: , version: 1.9.0
+[0m00:44:06.651901 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m00:44:06.652892 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'a1ea1e0d-344b-464e-a4df-63c0b78a7532', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed3d35130>]}
+[0m00:44:11.356932 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'a1ea1e0d-344b-464e-a4df-63c0b78a7532', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed20d2480>]}
+[0m00:44:11.409076 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'a1ea1e0d-344b-464e-a4df-63c0b78a7532', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed1f25970>]}
+[0m00:44:11.409816 [info ] [MainThread]: Found 11 models, 58 data tests, 813 macros
+[0m00:44:11.410331 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'a1ea1e0d-344b-464e-a4df-63c0b78a7532', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed20d1fa0>]}
+[0m00:44:11.417158 [info ] [MainThread]: 
+[0m00:44:11.418141 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m00:44:11.418795 [info ] [MainThread]: 
+[0m00:44:11.419721 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m00:44:11.428443 [debug] [ThreadPool]: Acquiring new postgres connection 'list_dev_dbt_bronze'
+[0m00:44:11.429545 [debug] [ThreadPool]: Acquiring new postgres connection 'list_dev_dbt_gold'
+[0m00:44:11.435591 [debug] [ThreadPool]: Acquiring new postgres connection 'list_dev_dbt_data_marts'
+[0m00:44:11.440447 [debug] [ThreadPool]: Acquiring new postgres connection 'list_dev_dbt_silver'
+[0m00:44:11.506224 [debug] [ThreadPool]: Using postgres connection "list_dev_dbt_bronze"
+[0m00:44:11.506684 [debug] [ThreadPool]: Using postgres connection "list_dev_dbt_gold"
+[0m00:44:11.507121 [debug] [ThreadPool]: Using postgres connection "list_dev_dbt_data_marts"
+[0m00:44:11.507573 [debug] [ThreadPool]: Using postgres connection "list_dev_dbt_silver"
+[0m00:44:11.507899 [debug] [ThreadPool]: On list_dev_dbt_bronze: BEGIN
+[0m00:44:11.508275 [debug] [ThreadPool]: On list_dev_dbt_gold: BEGIN
+[0m00:44:11.508664 [debug] [ThreadPool]: On list_dev_dbt_data_marts: BEGIN
+[0m00:44:11.509053 [debug] [ThreadPool]: On list_dev_dbt_silver: BEGIN
+[0m00:44:11.509517 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m00:44:11.509885 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m00:44:11.510316 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m00:44:11.510700 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m00:44:11.544900 [debug] [ThreadPool]: SQL status: BEGIN in 0.035 seconds
+[0m00:44:11.545548 [debug] [ThreadPool]: SQL status: BEGIN in 0.035 seconds
+[0m00:44:11.545997 [debug] [ThreadPool]: SQL status: BEGIN in 0.036 seconds
+[0m00:44:11.546426 [debug] [ThreadPool]: Using postgres connection "list_dev_dbt_bronze"
+[0m00:44:11.546901 [debug] [ThreadPool]: SQL status: BEGIN in 0.036 seconds
+[0m00:44:11.547649 [debug] [ThreadPool]: Using postgres connection "list_dev_dbt_data_marts"
+[0m00:44:11.548168 [debug] [ThreadPool]: Using postgres connection "list_dev_dbt_gold"
+[0m00:44:11.548724 [debug] [ThreadPool]: On list_dev_dbt_bronze: /* {"app": "dbt", "dbt_version": "1.9.0", "profile_name": "default", "target_name": "dev", "connection_name": "list_dev_dbt_bronze"} */
+select
+      'dev' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'dbt_bronze'
+    union all
+    select
+      'dev' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'dbt_bronze'
+    union all
+    select
+      'dev' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'dbt_bronze'
+  
+[0m00:44:11.549355 [debug] [ThreadPool]: Using postgres connection "list_dev_dbt_silver"
+[0m00:44:11.550207 [debug] [ThreadPool]: On list_dev_dbt_data_marts: /* {"app": "dbt", "dbt_version": "1.9.0", "profile_name": "default", "target_name": "dev", "connection_name": "list_dev_dbt_data_marts"} */
+select
+      'dev' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'dbt_data_marts'
+    union all
+    select
+      'dev' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'dbt_data_marts'
+    union all
+    select
+      'dev' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'dbt_data_marts'
+  
+[0m00:44:11.550943 [debug] [ThreadPool]: On list_dev_dbt_gold: /* {"app": "dbt", "dbt_version": "1.9.0", "profile_name": "default", "target_name": "dev", "connection_name": "list_dev_dbt_gold"} */
+select
+      'dev' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'dbt_gold'
+    union all
+    select
+      'dev' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'dbt_gold'
+    union all
+    select
+      'dev' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'dbt_gold'
+  
+[0m00:44:11.552184 [debug] [ThreadPool]: On list_dev_dbt_silver: /* {"app": "dbt", "dbt_version": "1.9.0", "profile_name": "default", "target_name": "dev", "connection_name": "list_dev_dbt_silver"} */
+select
+      'dev' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'dbt_silver'
+    union all
+    select
+      'dev' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'dbt_silver'
+    union all
+    select
+      'dev' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'dbt_silver'
+  
+[0m00:44:11.603848 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.049 seconds
+[0m00:44:11.604609 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.053 seconds
+[0m00:44:11.605905 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.052 seconds
+[0m00:44:11.606564 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.053 seconds
+[0m00:44:11.608964 [debug] [ThreadPool]: On list_dev_dbt_silver: ROLLBACK
+[0m00:44:11.611150 [debug] [ThreadPool]: On list_dev_dbt_bronze: ROLLBACK
+[0m00:44:11.613542 [debug] [ThreadPool]: On list_dev_dbt_gold: ROLLBACK
+[0m00:44:11.616156 [debug] [ThreadPool]: On list_dev_dbt_data_marts: ROLLBACK
+[0m00:44:11.617232 [debug] [ThreadPool]: On list_dev_dbt_silver: Close
+[0m00:44:11.617874 [debug] [ThreadPool]: On list_dev_dbt_bronze: Close
+[0m00:44:11.618874 [debug] [ThreadPool]: On list_dev_dbt_data_marts: Close
+[0m00:44:11.619452 [debug] [ThreadPool]: On list_dev_dbt_gold: Close
+[0m00:44:11.634590 [debug] [MainThread]: Using postgres connection "master"
+[0m00:44:11.635589 [debug] [MainThread]: On master: BEGIN
+[0m00:44:11.636826 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m00:44:11.645834 [debug] [MainThread]: SQL status: BEGIN in 0.009 seconds
+[0m00:44:11.646590 [debug] [MainThread]: Using postgres connection "master"
+[0m00:44:11.647315 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.9.0", "profile_name": "default", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m00:44:11.665279 [debug] [MainThread]: SQL status: SELECT 0 in 0.017 seconds
+[0m00:44:11.669182 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'a1ea1e0d-344b-464e-a4df-63c0b78a7532', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed20d3140>]}
+[0m00:44:11.670894 [debug] [MainThread]: On master: ROLLBACK
+[0m00:44:11.671941 [debug] [MainThread]: On master: Close
+[0m00:44:11.695602 [debug] [Thread-1 (]: Began running node model.take_home.customer_transactions
+[0m00:44:11.699090 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_dev_dbt_data_marts, now model.take_home.customer_transactions)
+[0m00:44:11.699861 [debug] [Thread-1 (]: Began compiling node model.take_home.customer_transactions
+[0m00:44:11.696600 [debug] [Thread-2 (]: Began running node model.take_home.date_dim
+[0m00:44:11.719180 [debug] [Thread-1 (]: Writing injected SQL for node "model.take_home.customer_transactions"
+[0m00:44:11.719970 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly list_dev_dbt_bronze, now model.take_home.date_dim)
+[0m00:44:11.721427 [debug] [Thread-1 (]: Began executing node model.take_home.customer_transactions
+[0m00:44:11.722090 [debug] [Thread-2 (]: Began compiling node model.take_home.date_dim
+[0m00:44:11.723465 [debug] [Thread-1 (]: Finished running node model.take_home.customer_transactions
+[0m00:44:11.746406 [debug] [Thread-2 (]: Using postgres connection "model.take_home.date_dim"
+[0m00:44:11.747960 [debug] [Thread-2 (]: On model.take_home.date_dim: BEGIN
+[0m00:44:11.751103 [debug] [Thread-4 (]: Began running node model.take_home.missing_quantity
+[0m00:44:11.751961 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m00:44:11.753337 [debug] [Thread-3 (]: Began running node model.take_home.transaction
+[0m00:44:11.754085 [debug] [Thread-1 (]: Began running node test.take_home.not_null_customer_transactions_price.3178e981b7
+[0m00:44:11.755070 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly list_dev_dbt_silver, now model.take_home.missing_quantity)
+[0m00:44:11.756907 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly list_dev_dbt_gold, now model.take_home.transaction)
+[0m00:44:11.758937 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.take_home.customer_transactions, now test.take_home.not_null_customer_transactions_price.3178e981b7)
+[0m00:44:11.759798 [debug] [Thread-4 (]: Began compiling node model.take_home.missing_quantity
+[0m00:44:11.761881 [debug] [Thread-3 (]: Began compiling node model.take_home.transaction
+[0m00:44:11.762532 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_customer_transactions_price.3178e981b7
+[0m00:44:11.767326 [debug] [Thread-4 (]: Writing injected SQL for node "model.take_home.missing_quantity"
+[0m00:44:11.773643 [debug] [Thread-2 (]: SQL status: BEGIN in 0.021 seconds
+[0m00:44:11.803881 [debug] [Thread-3 (]: Writing injected SQL for node "model.take_home.transaction"
+[0m00:44:11.843283 [debug] [Thread-4 (]: Began executing node model.take_home.missing_quantity
+[0m00:44:11.844620 [debug] [Thread-2 (]: Using postgres connection "model.take_home.date_dim"
+[0m00:44:11.851202 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_customer_transactions_price.3178e981b7"
+[0m00:44:11.852648 [debug] [Thread-3 (]: Began executing node model.take_home.transaction
+[0m00:44:11.854263 [debug] [Thread-4 (]: Finished running node model.take_home.missing_quantity
+[0m00:44:11.855107 [debug] [Thread-2 (]: On model.take_home.date_dim: /* {"app": "dbt", "dbt_version": "1.9.0", "profile_name": "default", "target_name": "dev", "node_id": "model.take_home.date_dim"} */
+
+
+        select 
+        ((cast('2050-12-31' as timestamp))::date - (cast('2020-01-01' as timestamp))::date)
+    
+[0m00:44:11.858622 [debug] [Thread-3 (]: Finished running node model.take_home.transaction
+[0m00:44:11.859417 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_customer_transactions_price.3178e981b7
+[0m00:44:11.860310 [debug] [Thread-4 (]: Began running node test.take_home.not_null_customer_transactions_product_name.e076bbae70
+[0m00:44:11.864938 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.take_home.missing_quantity, now test.take_home.not_null_customer_transactions_product_name.e076bbae70)
+[0m00:44:11.863808 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_customer_transactions_price.3178e981b7
+[0m00:44:11.861491 [debug] [Thread-3 (]: Began running node test.take_home.not_null_customer_transactions_quantity.181500eb08
+[0m00:44:11.866190 [debug] [Thread-2 (]: SQL status: SELECT 1 in 0.005 seconds
+[0m00:44:11.869181 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_customer_transactions_product_name.e076bbae70
+[0m00:44:11.871317 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.take_home.transaction, now test.take_home.not_null_customer_transactions_quantity.181500eb08)
+[0m00:44:11.870447 [debug] [Thread-1 (]: Began running node test.take_home.not_null_customer_transactions_tax.24b12e83a3
+[0m00:44:11.899952 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_customer_transactions_quantity.181500eb08
+[0m00:44:11.904136 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_customer_transactions_product_name.e076bbae70"
+[0m00:44:11.921708 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_customer_transactions_quantity.181500eb08"
+[0m00:44:11.909202 [debug] [Thread-2 (]: Writing injected SQL for node "model.take_home.date_dim"
+[0m00:44:11.910163 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_transactions_price.3178e981b7, now test.take_home.not_null_customer_transactions_tax.24b12e83a3)
+[0m00:44:11.922923 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_customer_transactions_product_name.e076bbae70
+[0m00:44:11.925256 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_customer_transactions_tax.24b12e83a3
+[0m00:44:11.924518 [debug] [Thread-2 (]: Began executing node model.take_home.date_dim
+[0m00:44:11.923634 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_customer_transactions_quantity.181500eb08
+[0m00:44:11.926437 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_customer_transactions_product_name.e076bbae70
+[0m00:44:11.935469 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_customer_transactions_tax.24b12e83a3"
+[0m00:44:11.936224 [debug] [Thread-2 (]: On model.take_home.date_dim: ROLLBACK
+[0m00:44:11.938347 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_customer_transactions_quantity.181500eb08
+[0m00:44:11.939318 [debug] [Thread-4 (]: Began running node test.take_home.not_null_customer_transactions_transaction_date.40de824d0b
+[0m00:44:11.940324 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_customer_transactions_tax.24b12e83a3
+[0m00:44:11.941059 [debug] [Thread-3 (]: Began running node model.take_home.customer_dim
+[0m00:44:11.941880 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_transactions_product_name.e076bbae70, now test.take_home.not_null_customer_transactions_transaction_date.40de824d0b)
+[0m00:44:11.942593 [debug] [Thread-2 (]: On model.take_home.date_dim: Close
+[0m00:44:11.943711 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_customer_transactions_tax.24b12e83a3
+[0m00:44:11.944272 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_transactions_quantity.181500eb08, now model.take_home.customer_dim)
+[0m00:44:11.945542 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_customer_transactions_transaction_date.40de824d0b
+[0m00:44:11.949239 [debug] [Thread-3 (]: Began compiling node model.take_home.customer_dim
+[0m00:44:11.948172 [debug] [Thread-2 (]: Finished running node model.take_home.date_dim
+[0m00:44:11.946917 [debug] [Thread-1 (]: Began running node model.take_home.location_dim
+[0m00:44:12.071854 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_customer_transactions_transaction_date.40de824d0b"
+[0m00:44:12.072378 [debug] [Thread-3 (]: Writing injected SQL for node "model.take_home.customer_dim"
+[0m00:44:12.073022 [debug] [Thread-2 (]: Began running node model.take_home.product_dim
+[0m00:44:12.073645 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_transactions_tax.24b12e83a3, now model.take_home.location_dim)
+[0m00:44:12.074350 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_customer_transactions_transaction_date.40de824d0b
+[0m00:44:12.083315 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.take_home.date_dim, now model.take_home.product_dim)
+[0m00:44:12.083935 [debug] [Thread-3 (]: Began executing node model.take_home.customer_dim
+[0m00:44:12.084459 [debug] [Thread-1 (]: Began compiling node model.take_home.location_dim
+[0m00:44:12.085347 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_customer_transactions_transaction_date.40de824d0b
+[0m00:44:12.085875 [debug] [Thread-2 (]: Began compiling node model.take_home.product_dim
+[0m00:44:12.086759 [debug] [Thread-3 (]: Finished running node model.take_home.customer_dim
+[0m00:44:12.091798 [debug] [Thread-1 (]: Writing injected SQL for node "model.take_home.location_dim"
+[0m00:44:12.092685 [debug] [Thread-4 (]: Began running node model.take_home.transaction_fct
+[0m00:44:12.098866 [debug] [Thread-2 (]: Writing injected SQL for node "model.take_home.product_dim"
+[0m00:44:12.099583 [debug] [Thread-3 (]: Began running node test.take_home.not_null_transaction_customer_city.528201219b
+[0m00:44:12.106284 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.take_home.customer_dim, now test.take_home.not_null_transaction_customer_city.528201219b)
+[0m00:44:12.101661 [debug] [Thread-1 (]: Began executing node model.take_home.location_dim
+[0m00:44:12.100934 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_transactions_transaction_date.40de824d0b, now model.take_home.transaction_fct)
+[0m00:44:12.106854 [debug] [Thread-2 (]: Began executing node model.take_home.product_dim
+[0m00:44:12.107298 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_transaction_customer_city.528201219b
+[0m00:44:12.113530 [debug] [Thread-1 (]: Finished running node model.take_home.location_dim
+[0m00:44:12.115231 [debug] [Thread-4 (]: Began compiling node model.take_home.transaction_fct
+[0m00:44:12.123724 [debug] [Thread-1 (]: Began running node test.take_home.not_null_transaction_customer_country.f5aa3e8796
+[0m00:44:12.131154 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.take_home.location_dim, now test.take_home.not_null_transaction_customer_country.f5aa3e8796)
+[0m00:44:12.116340 [debug] [Thread-2 (]: Finished running node model.take_home.product_dim
+[0m00:44:12.132551 [debug] [Thread-2 (]: Began running node test.take_home.not_null_transaction_customer_email.66f03383fe
+[0m00:44:12.133123 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.take_home.product_dim, now test.take_home.not_null_transaction_customer_email.66f03383fe)
+[0m00:44:12.133637 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_transaction_customer_email.66f03383fe
+[0m00:44:12.122874 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_transaction_customer_city.528201219b"
+[0m00:44:12.140742 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_transaction_customer_city.528201219b
+[0m00:44:12.141867 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_transaction_customer_city.528201219b
+[0m00:44:12.142474 [debug] [Thread-3 (]: Began running node test.take_home.not_null_transaction_customer_first_name.b143dc77c9
+[0m00:44:12.131806 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_transaction_customer_country.f5aa3e8796
+[0m00:44:12.130356 [debug] [Thread-4 (]: Writing injected SQL for node "model.take_home.transaction_fct"
+[0m00:44:12.143026 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_customer_city.528201219b, now test.take_home.not_null_transaction_customer_first_name.b143dc77c9)
+[0m00:44:12.153790 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_transaction_customer_first_name.b143dc77c9
+[0m00:44:12.153111 [debug] [Thread-4 (]: Began executing node model.take_home.transaction_fct
+[0m00:44:12.164912 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_transaction_customer_email.66f03383fe"
+[0m00:44:12.170315 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_transaction_customer_email.66f03383fe
+[0m00:44:12.171419 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_transaction_customer_email.66f03383fe
+[0m00:44:12.167273 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_transaction_customer_first_name.b143dc77c9"
+[0m00:44:12.172909 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_transaction_customer_first_name.b143dc77c9
+[0m00:44:12.173959 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_transaction_customer_first_name.b143dc77c9
+[0m00:44:12.168972 [debug] [Thread-4 (]: Finished running node model.take_home.transaction_fct
+[0m00:44:12.172087 [debug] [Thread-2 (]: Began running node test.take_home.not_null_transaction_customer_id.cda224e36a
+[0m00:44:12.162998 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_transaction_customer_country.f5aa3e8796"
+[0m00:44:12.178317 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_transaction_customer_country.f5aa3e8796
+[0m00:44:12.179348 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_transaction_customer_country.f5aa3e8796
+[0m00:44:12.179945 [debug] [Thread-1 (]: Began running node test.take_home.not_null_transaction_price.de1706ac95
+[0m00:44:12.180512 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_customer_country.f5aa3e8796, now test.take_home.not_null_transaction_price.de1706ac95)
+[0m00:44:12.181028 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_transaction_price.de1706ac95
+[0m00:44:12.174615 [debug] [Thread-3 (]: Began running node test.take_home.not_null_transaction_customer_last_name.c2e624ea1d
+[0m00:44:12.187027 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_customer_first_name.b143dc77c9, now test.take_home.not_null_transaction_customer_last_name.c2e624ea1d)
+[0m00:44:12.175774 [debug] [Thread-4 (]: Began running node test.take_home.not_null_transaction_customer_phone.49d9200e27
+[0m00:44:12.177438 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_customer_email.66f03383fe, now test.take_home.not_null_transaction_customer_id.cda224e36a)
+[0m00:44:12.189383 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_transaction_customer_id.cda224e36a
+[0m00:44:12.187757 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_transaction_customer_last_name.c2e624ea1d
+[0m00:44:12.188351 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.take_home.transaction_fct, now test.take_home.not_null_transaction_customer_phone.49d9200e27)
+[0m00:44:12.197141 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_transaction_customer_id.cda224e36a"
+[0m00:44:12.200159 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_transaction_price.de1706ac95"
+[0m00:44:12.209275 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_transaction_customer_last_name.c2e624ea1d"
+[0m00:44:12.210237 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_transaction_customer_phone.49d9200e27
+[0m00:44:12.211627 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_transaction_customer_id.cda224e36a
+[0m00:44:12.212657 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_transaction_customer_last_name.c2e624ea1d
+[0m00:44:12.213245 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_transaction_price.de1706ac95
+[0m00:44:12.222606 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_transaction_customer_phone.49d9200e27"
+[0m00:44:12.228705 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_transaction_price.de1706ac95
+[0m00:44:12.225014 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_transaction_customer_id.cda224e36a
+[0m00:44:12.226781 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_transaction_customer_last_name.c2e624ea1d
+[0m00:44:12.229977 [debug] [Thread-1 (]: Began running node test.take_home.not_null_transaction_product_id.26783c7b0a
+[0m00:44:12.231220 [debug] [Thread-2 (]: Began running node test.take_home.not_null_transaction_product_name.c46ebf6f67
+[0m00:44:12.232311 [debug] [Thread-3 (]: Began running node test.take_home.not_null_transaction_quantity.6f18abd57e
+[0m00:44:12.235581 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_customer_id.cda224e36a, now test.take_home.not_null_transaction_product_name.c46ebf6f67)
+[0m00:44:12.236322 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_customer_last_name.c2e624ea1d, now test.take_home.not_null_transaction_quantity.6f18abd57e)
+[0m00:44:12.233009 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_transaction_customer_phone.49d9200e27
+[0m00:44:12.237804 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_transaction_quantity.6f18abd57e
+[0m00:44:12.239229 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_transaction_customer_phone.49d9200e27
+[0m00:44:12.234718 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_price.de1706ac95, now test.take_home.not_null_transaction_product_id.26783c7b0a)
+[0m00:44:12.237088 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_transaction_product_name.c46ebf6f67
+[0m00:44:12.246712 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_transaction_product_id.26783c7b0a
+[0m00:44:12.245795 [debug] [Thread-4 (]: Began running node test.take_home.not_null_transaction_tax.a4120e0433
+[0m00:44:12.256304 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_transaction_quantity.6f18abd57e"
+[0m00:44:12.261970 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_transaction_product_name.c46ebf6f67"
+[0m00:44:12.268469 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_customer_phone.49d9200e27, now test.take_home.not_null_transaction_tax.a4120e0433)
+[0m00:44:12.272610 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_transaction_product_id.26783c7b0a"
+[0m00:44:12.273758 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_transaction_quantity.6f18abd57e
+[0m00:44:12.274821 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_transaction_product_name.c46ebf6f67
+[0m00:44:12.275518 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_transaction_tax.a4120e0433
+[0m00:44:12.277344 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_transaction_product_id.26783c7b0a
+[0m00:44:12.278683 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_transaction_quantity.6f18abd57e
+[0m00:44:12.280153 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_transaction_product_name.c46ebf6f67
+[0m00:44:12.287125 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_transaction_product_id.26783c7b0a
+[0m00:44:12.289846 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_transaction_tax.a4120e0433"
+[0m00:44:12.290767 [debug] [Thread-3 (]: Began running node test.take_home.not_null_transaction_transaction_date.35bcac1567
+[0m00:44:12.291815 [debug] [Thread-2 (]: Began running node test.take_home.not_null_transaction_transaction_id.216ba7395c
+[0m00:44:12.293357 [debug] [Thread-1 (]: Began running node test.take_home.unique_transaction_customer_email.6659a469f9
+[0m00:44:12.295476 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_quantity.6f18abd57e, now test.take_home.not_null_transaction_transaction_date.35bcac1567)
+[0m00:44:12.294517 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_transaction_tax.a4120e0433
+[0m00:44:12.296548 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_product_name.c46ebf6f67, now test.take_home.not_null_transaction_transaction_id.216ba7395c)
+[0m00:44:12.297955 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_product_id.26783c7b0a, now test.take_home.unique_transaction_customer_email.6659a469f9)
+[0m00:44:12.299170 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_transaction_transaction_date.35bcac1567
+[0m00:44:12.301482 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_transaction_tax.a4120e0433
+[0m00:44:12.302789 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_transaction_transaction_id.216ba7395c
+[0m00:44:12.303532 [debug] [Thread-1 (]: Began compiling node test.take_home.unique_transaction_customer_email.6659a469f9
+[0m00:44:12.310498 [debug] [Thread-4 (]: Began running node test.take_home.unique_transaction_customer_phone.446b9370b4
+[0m00:44:12.315137 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_transaction_transaction_date.35bcac1567"
+[0m00:44:12.324143 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_transaction_transaction_id.216ba7395c"
+[0m00:44:12.330565 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_tax.a4120e0433, now test.take_home.unique_transaction_customer_phone.446b9370b4)
+[0m00:44:12.338497 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.unique_transaction_customer_email.6659a469f9"
+[0m00:44:12.339772 [debug] [Thread-4 (]: Began compiling node test.take_home.unique_transaction_customer_phone.446b9370b4
+[0m00:44:12.340890 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_transaction_transaction_date.35bcac1567
+[0m00:44:12.341764 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_transaction_transaction_id.216ba7395c
+[0m00:44:12.350361 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.unique_transaction_customer_phone.446b9370b4"
+[0m00:44:12.351208 [debug] [Thread-1 (]: Began executing node test.take_home.unique_transaction_customer_email.6659a469f9
+[0m00:44:12.352520 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_transaction_transaction_date.35bcac1567
+[0m00:44:12.353483 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_transaction_transaction_id.216ba7395c
+[0m00:44:12.354159 [debug] [Thread-4 (]: Began executing node test.take_home.unique_transaction_customer_phone.446b9370b4
+[0m00:44:12.355115 [debug] [Thread-1 (]: Finished running node test.take_home.unique_transaction_customer_email.6659a469f9
+[0m00:44:12.355769 [debug] [Thread-3 (]: Began running node test.take_home.unique_transaction_transaction_id.3656eb65a6
+[0m00:44:12.356318 [debug] [Thread-2 (]: Began running node test.take_home.not_null_customer_dim_email.8c0674098e
+[0m00:44:12.357697 [debug] [Thread-4 (]: Finished running node test.take_home.unique_transaction_customer_phone.446b9370b4
+[0m00:44:12.358386 [debug] [Thread-1 (]: Began running node test.take_home.not_null_customer_dim_first_name.5621c1037d
+[0m00:44:12.359295 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_transaction_date.35bcac1567, now test.take_home.unique_transaction_transaction_id.3656eb65a6)
+[0m00:44:12.361926 [debug] [Thread-3 (]: Began compiling node test.take_home.unique_transaction_transaction_id.3656eb65a6
+[0m00:44:12.360662 [debug] [Thread-4 (]: Began running node test.take_home.not_null_customer_dim_id.911921111a
+[0m00:44:12.361325 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.unique_transaction_customer_email.6659a469f9, now test.take_home.not_null_customer_dim_first_name.5621c1037d)
+[0m00:44:12.359950 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_transaction_id.216ba7395c, now test.take_home.not_null_customer_dim_email.8c0674098e)
+[0m00:44:12.370818 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.unique_transaction_transaction_id.3656eb65a6"
+[0m00:44:12.372141 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.unique_transaction_customer_phone.446b9370b4, now test.take_home.not_null_customer_dim_id.911921111a)
+[0m00:44:12.373050 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_customer_dim_first_name.5621c1037d
+[0m00:44:12.373742 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_customer_dim_email.8c0674098e
+[0m00:44:12.374533 [debug] [Thread-3 (]: Began executing node test.take_home.unique_transaction_transaction_id.3656eb65a6
+[0m00:44:12.375129 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_customer_dim_id.911921111a
+[0m00:44:12.388143 [debug] [Thread-3 (]: Finished running node test.take_home.unique_transaction_transaction_id.3656eb65a6
+[0m00:44:12.396862 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_customer_dim_email.8c0674098e"
+[0m00:44:12.398344 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_customer_dim_first_name.5621c1037d"
+[0m00:44:12.405188 [debug] [Thread-3 (]: Began running node test.take_home.not_null_customer_dim_last_name.ce2291c090
+[0m00:44:12.416430 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.unique_transaction_transaction_id.3656eb65a6, now test.take_home.not_null_customer_dim_last_name.ce2291c090)
+[0m00:44:12.412966 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_customer_dim_id.911921111a"
+[0m00:44:12.419841 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_customer_dim_id.911921111a
+[0m00:44:12.414297 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_customer_dim_email.8c0674098e
+[0m00:44:12.422807 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_customer_dim_email.8c0674098e
+[0m00:44:12.417342 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_customer_dim_last_name.ce2291c090
+[0m00:44:12.418263 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_customer_dim_first_name.5621c1037d
+[0m00:44:12.430815 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_customer_dim_first_name.5621c1037d
+[0m00:44:12.421343 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_customer_dim_id.911921111a
+[0m00:44:12.423672 [debug] [Thread-2 (]: Began running node test.take_home.not_null_customer_dim_phone.ae039b27c5
+[0m00:44:12.431651 [debug] [Thread-1 (]: Began running node test.take_home.unique_customer_dim_email.be04306d23
+[0m00:44:12.436659 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_customer_dim_last_name.ce2291c090"
+[0m00:44:12.439469 [debug] [Thread-4 (]: Began running node test.take_home.unique_customer_dim_id.c5a105526b
+[0m00:44:12.441313 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_dim_email.8c0674098e, now test.take_home.not_null_customer_dim_phone.ae039b27c5)
+[0m00:44:12.444214 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_dim_id.911921111a, now test.take_home.unique_customer_dim_id.c5a105526b)
+[0m00:44:12.443260 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_dim_first_name.5621c1037d, now test.take_home.unique_customer_dim_email.be04306d23)
+[0m00:44:12.445077 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_customer_dim_phone.ae039b27c5
+[0m00:44:12.446262 [debug] [Thread-4 (]: Began compiling node test.take_home.unique_customer_dim_id.c5a105526b
+[0m00:44:12.447082 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_customer_dim_last_name.ce2291c090
+[0m00:44:12.447642 [debug] [Thread-1 (]: Began compiling node test.take_home.unique_customer_dim_email.be04306d23
+[0m00:44:12.463826 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_customer_dim_phone.ae039b27c5"
+[0m00:44:12.467190 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.unique_customer_dim_id.c5a105526b"
+[0m00:44:12.470655 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_customer_dim_last_name.ce2291c090
+[0m00:44:12.478412 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.unique_customer_dim_email.be04306d23"
+[0m00:44:12.479527 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_customer_dim_phone.ae039b27c5
+[0m00:44:12.480584 [debug] [Thread-3 (]: Began running node test.take_home.not_null_location_dim_city.edbd01da1a
+[0m00:44:12.481333 [debug] [Thread-4 (]: Began executing node test.take_home.unique_customer_dim_id.c5a105526b
+[0m00:44:12.483004 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_customer_dim_phone.ae039b27c5
+[0m00:44:12.483739 [debug] [Thread-1 (]: Began executing node test.take_home.unique_customer_dim_email.be04306d23
+[0m00:44:12.484708 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_dim_last_name.ce2291c090, now test.take_home.not_null_location_dim_city.edbd01da1a)
+[0m00:44:12.486082 [debug] [Thread-4 (]: Finished running node test.take_home.unique_customer_dim_id.c5a105526b
+[0m00:44:12.486969 [debug] [Thread-2 (]: Began running node test.take_home.not_null_location_dim_country.2ead580363
+[0m00:44:12.488355 [debug] [Thread-1 (]: Finished running node test.take_home.unique_customer_dim_email.be04306d23
+[0m00:44:12.489317 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_location_dim_city.edbd01da1a
+[0m00:44:12.490227 [debug] [Thread-4 (]: Began running node test.take_home.not_null_location_dim_id.56643b78c3
+[0m00:44:12.491237 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_customer_dim_phone.ae039b27c5, now test.take_home.not_null_location_dim_country.2ead580363)
+[0m00:44:12.492066 [debug] [Thread-1 (]: Began running node test.take_home.not_null_product_dim_id.21197fcee3
+[0m00:44:12.505602 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_location_dim_city.edbd01da1a"
+[0m00:44:12.506425 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.unique_customer_dim_id.c5a105526b, now test.take_home.not_null_location_dim_id.56643b78c3)
+[0m00:44:12.507248 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_location_dim_country.2ead580363
+[0m00:44:12.508117 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.unique_customer_dim_email.be04306d23, now test.take_home.not_null_product_dim_id.21197fcee3)
+[0m00:44:12.509134 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_location_dim_id.56643b78c3
+[0m00:44:12.509948 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_location_dim_city.edbd01da1a
+[0m00:44:12.519202 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_location_dim_country.2ead580363"
+[0m00:44:12.522504 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_product_dim_id.21197fcee3
+[0m00:44:12.531264 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_location_dim_id.56643b78c3"
+[0m00:44:12.533147 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_location_dim_city.edbd01da1a
+[0m00:44:12.541540 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_product_dim_id.21197fcee3"
+[0m00:44:12.542492 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_location_dim_country.2ead580363
+[0m00:44:12.543834 [debug] [Thread-3 (]: Began running node test.take_home.not_null_product_dim_name.aa183f7cc2
+[0m00:44:12.545078 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_location_dim_id.56643b78c3
+[0m00:44:12.547925 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_location_dim_country.2ead580363
+[0m00:44:12.549075 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_location_dim_city.edbd01da1a, now test.take_home.not_null_product_dim_name.aa183f7cc2)
+[0m00:44:12.550899 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_product_dim_id.21197fcee3
+[0m00:44:12.553094 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_location_dim_id.56643b78c3
+[0m00:44:12.558101 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_product_dim_id.21197fcee3
+[0m00:44:12.556041 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_product_dim_name.aa183f7cc2
+[0m00:44:12.554839 [debug] [Thread-2 (]: Began running node test.take_home.unique_location_dim_id.9a5b83096c
+[0m00:44:12.559379 [debug] [Thread-4 (]: Began running node test.take_home.unique_product_dim_id.dada6eb62e
+[0m00:44:12.560296 [debug] [Thread-1 (]: Began running node model.take_home.agg_sales_country
+[0m00:44:12.569443 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_product_dim_name.aa183f7cc2"
+[0m00:44:12.570300 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_location_dim_country.2ead580363, now test.take_home.unique_location_dim_id.9a5b83096c)
+[0m00:44:12.573081 [debug] [Thread-2 (]: Began compiling node test.take_home.unique_location_dim_id.9a5b83096c
+[0m00:44:12.571602 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_product_dim_id.21197fcee3, now model.take_home.agg_sales_country)
+[0m00:44:12.572497 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_product_dim_name.aa183f7cc2
+[0m00:44:12.570954 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_location_dim_id.56643b78c3, now test.take_home.unique_product_dim_id.dada6eb62e)
+[0m00:44:12.581060 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.unique_location_dim_id.9a5b83096c"
+[0m00:44:12.581980 [debug] [Thread-1 (]: Began compiling node model.take_home.agg_sales_country
+[0m00:44:12.583416 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_product_dim_name.aa183f7cc2
+[0m00:44:12.584234 [debug] [Thread-4 (]: Began compiling node test.take_home.unique_product_dim_id.dada6eb62e
+[0m00:44:12.585271 [debug] [Thread-2 (]: Began executing node test.take_home.unique_location_dim_id.9a5b83096c
+[0m00:44:12.592030 [debug] [Thread-1 (]: Writing injected SQL for node "model.take_home.agg_sales_country"
+[0m00:44:12.593049 [debug] [Thread-3 (]: Began running node model.take_home.agg_sales_customer
+[0m00:44:12.601359 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.unique_product_dim_id.dada6eb62e"
+[0m00:44:12.602811 [debug] [Thread-2 (]: Finished running node test.take_home.unique_location_dim_id.9a5b83096c
+[0m00:44:12.603784 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_product_dim_name.aa183f7cc2, now model.take_home.agg_sales_customer)
+[0m00:44:12.606119 [debug] [Thread-3 (]: Began compiling node model.take_home.agg_sales_customer
+[0m00:44:12.604756 [debug] [Thread-1 (]: Began executing node model.take_home.agg_sales_country
+[0m00:44:12.613296 [debug] [Thread-1 (]: Finished running node model.take_home.agg_sales_country
+[0m00:44:12.605459 [debug] [Thread-2 (]: Began running node model.take_home.agg_sales_monthly
+[0m00:44:12.614241 [debug] [Thread-4 (]: Began executing node test.take_home.unique_product_dim_id.dada6eb62e
+[0m00:44:12.621487 [debug] [Thread-3 (]: Writing injected SQL for node "model.take_home.agg_sales_customer"
+[0m00:44:12.626244 [debug] [Thread-4 (]: Finished running node test.take_home.unique_product_dim_id.dada6eb62e
+[0m00:44:12.627393 [debug] [Thread-4 (]: Began running node test.take_home.not_null_transaction_fct_customer_location_id.42778bf2c7
+[0m00:44:12.623951 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.unique_location_dim_id.9a5b83096c, now model.take_home.agg_sales_monthly)
+[0m00:44:12.622436 [debug] [Thread-1 (]: Began running node test.take_home.not_null_transaction_fct_customer_id.4451fd16ee
+[0m00:44:12.628256 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.unique_product_dim_id.dada6eb62e, now test.take_home.not_null_transaction_fct_customer_location_id.42778bf2c7)
+[0m00:44:12.629264 [debug] [Thread-3 (]: Began executing node model.take_home.agg_sales_customer
+[0m00:44:12.639463 [debug] [Thread-3 (]: Finished running node model.take_home.agg_sales_customer
+[0m00:44:12.640227 [debug] [Thread-3 (]: Began running node test.take_home.not_null_transaction_fct_price.eb450ca907
+[0m00:44:12.637928 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_transaction_fct_customer_location_id.42778bf2c7
+[0m00:44:12.641244 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.take_home.agg_sales_customer, now test.take_home.not_null_transaction_fct_price.eb450ca907)
+[0m00:44:12.630898 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.take_home.agg_sales_country, now test.take_home.not_null_transaction_fct_customer_id.4451fd16ee)
+[0m00:44:12.629945 [debug] [Thread-2 (]: Began compiling node model.take_home.agg_sales_monthly
+[0m00:44:12.650844 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_transaction_fct_customer_location_id.42778bf2c7"
+[0m00:44:12.651547 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_transaction_fct_price.eb450ca907
+[0m00:44:12.652014 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_transaction_fct_customer_id.4451fd16ee
+[0m00:44:12.657356 [debug] [Thread-2 (]: Writing injected SQL for node "model.take_home.agg_sales_monthly"
+[0m00:44:12.667039 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_transaction_fct_price.eb450ca907"
+[0m00:44:12.673066 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_transaction_fct_customer_location_id.42778bf2c7
+[0m00:44:12.674403 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_transaction_fct_customer_id.4451fd16ee"
+[0m00:44:12.675445 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_transaction_fct_price.eb450ca907
+[0m00:44:12.676527 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_transaction_fct_customer_location_id.42778bf2c7
+[0m00:44:12.676957 [debug] [Thread-2 (]: Began executing node model.take_home.agg_sales_monthly
+[0m00:44:12.680677 [debug] [Thread-2 (]: Finished running node model.take_home.agg_sales_monthly
+[0m00:44:12.678924 [debug] [Thread-4 (]: Began running node test.take_home.not_null_transaction_fct_product_id.6891dc69b8
+[0m00:44:12.679501 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_transaction_fct_customer_id.4451fd16ee
+[0m00:44:12.678222 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_transaction_fct_price.eb450ca907
+[0m00:44:12.681264 [debug] [Thread-2 (]: Began running node test.take_home.not_null_transaction_fct_quantity.1ccbfdb0bd
+[0m00:44:12.682734 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_fct_customer_location_id.42778bf2c7, now test.take_home.not_null_transaction_fct_product_id.6891dc69b8)
+[0m00:44:12.684156 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_transaction_fct_customer_id.4451fd16ee
+[0m00:44:12.684866 [debug] [Thread-3 (]: Began running node test.take_home.not_null_transaction_fct_tax.39ab957efd
+[0m00:44:12.685463 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.take_home.agg_sales_monthly, now test.take_home.not_null_transaction_fct_quantity.1ccbfdb0bd)
+[0m00:44:12.686157 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_transaction_fct_product_id.6891dc69b8
+[0m00:44:12.686793 [debug] [Thread-1 (]: Began running node test.take_home.not_null_transaction_fct_transaction_date.8738020684
+[0m00:44:12.687846 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_fct_price.eb450ca907, now test.take_home.not_null_transaction_fct_tax.39ab957efd)
+[0m00:44:12.696066 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_transaction_fct_tax.39ab957efd
+[0m00:44:12.694856 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_transaction_fct_product_id.6891dc69b8"
+[0m00:44:12.695532 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_fct_customer_id.4451fd16ee, now test.take_home.not_null_transaction_fct_transaction_date.8738020684)
+[0m00:44:12.688427 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_transaction_fct_quantity.1ccbfdb0bd
+[0m00:44:12.702760 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_transaction_fct_tax.39ab957efd"
+[0m00:44:12.703695 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_transaction_fct_transaction_date.8738020684
+[0m00:44:12.713233 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_transaction_fct_quantity.1ccbfdb0bd"
+[0m00:44:12.721438 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_transaction_fct_transaction_date.8738020684"
+[0m00:44:12.722305 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_transaction_fct_product_id.6891dc69b8
+[0m00:44:12.724009 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_transaction_fct_tax.39ab957efd
+[0m00:44:12.725102 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_transaction_fct_quantity.1ccbfdb0bd
+[0m00:44:12.730804 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_transaction_fct_quantity.1ccbfdb0bd
+[0m00:44:12.727802 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_transaction_fct_transaction_date.8738020684
+[0m00:44:12.731564 [debug] [Thread-2 (]: Began running node test.take_home.not_null_transaction_fct_transaction_id.e03a5c0c55
+[0m00:44:12.729440 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_transaction_fct_tax.39ab957efd
+[0m00:44:12.734642 [debug] [Thread-3 (]: Began running node test.take_home.relationships_transaction_fct_customer_id__id__ref_customer_dim_.dfd8fdd493
+[0m00:44:12.733150 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_transaction_fct_transaction_date.8738020684
+[0m00:44:12.727102 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_transaction_fct_product_id.6891dc69b8
+[0m00:44:12.733906 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_fct_quantity.1ccbfdb0bd, now test.take_home.not_null_transaction_fct_transaction_id.e03a5c0c55)
+[0m00:44:12.735292 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_fct_tax.39ab957efd, now test.take_home.relationships_transaction_fct_customer_id__id__ref_customer_dim_.dfd8fdd493)
+[0m00:44:12.736042 [debug] [Thread-1 (]: Began running node test.take_home.relationships_transaction_fct_customer_location_id__id__ref_location_dim_.94cab4ea8e
+[0m00:44:12.736826 [debug] [Thread-4 (]: Began running node test.take_home.relationships_transaction_fct_product_id__id__ref_product_dim_.cdb2761445
+[0m00:44:12.737492 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_transaction_fct_transaction_id.e03a5c0c55
+[0m00:44:12.738109 [debug] [Thread-3 (]: Began compiling node test.take_home.relationships_transaction_fct_customer_id__id__ref_customer_dim_.dfd8fdd493
+[0m00:44:12.738771 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_fct_transaction_date.8738020684, now test.take_home.relationships_transaction_fct_customer_location_id__id__ref_location_dim_.94cab4ea8e)
+[0m00:44:12.739292 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_fct_product_id.6891dc69b8, now test.take_home.relationships_transaction_fct_product_id__id__ref_product_dim_.cdb2761445)
+[0m00:44:12.746123 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_transaction_fct_transaction_id.e03a5c0c55"
+[0m00:44:12.755710 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.relationships_transaction_fct_customer_id__id__ref_customer_dim_.dfd8fdd493"
+[0m00:44:12.756462 [debug] [Thread-1 (]: Began compiling node test.take_home.relationships_transaction_fct_customer_location_id__id__ref_location_dim_.94cab4ea8e
+[0m00:44:12.756955 [debug] [Thread-4 (]: Began compiling node test.take_home.relationships_transaction_fct_product_id__id__ref_product_dim_.cdb2761445
+[0m00:44:12.757908 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_transaction_fct_transaction_id.e03a5c0c55
+[0m00:44:12.765292 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.relationships_transaction_fct_customer_location_id__id__ref_location_dim_.94cab4ea8e"
+[0m00:44:12.766100 [debug] [Thread-3 (]: Began executing node test.take_home.relationships_transaction_fct_customer_id__id__ref_customer_dim_.dfd8fdd493
+[0m00:44:12.773460 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.relationships_transaction_fct_product_id__id__ref_product_dim_.cdb2761445"
+[0m00:44:12.774655 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_transaction_fct_transaction_id.e03a5c0c55
+[0m00:44:12.775807 [debug] [Thread-3 (]: Finished running node test.take_home.relationships_transaction_fct_customer_id__id__ref_customer_dim_.dfd8fdd493
+[0m00:44:12.776377 [debug] [Thread-1 (]: Began executing node test.take_home.relationships_transaction_fct_customer_location_id__id__ref_location_dim_.94cab4ea8e
+[0m00:44:12.777096 [debug] [Thread-2 (]: Began running node test.take_home.relationships_transaction_fct_transaction_date__date__ref_date_dim_.df1d738587
+[0m00:44:12.777651 [debug] [Thread-4 (]: Began executing node test.take_home.relationships_transaction_fct_product_id__id__ref_product_dim_.cdb2761445
+[0m00:44:12.778385 [debug] [Thread-3 (]: Began running node test.take_home.unique_transaction_fct_transaction_id.4ff53291d7
+[0m00:44:12.779795 [debug] [Thread-1 (]: Finished running node test.take_home.relationships_transaction_fct_customer_location_id__id__ref_location_dim_.94cab4ea8e
+[0m00:44:12.781570 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_transaction_fct_transaction_id.e03a5c0c55, now test.take_home.relationships_transaction_fct_transaction_date__date__ref_date_dim_.df1d738587)
+[0m00:44:12.785563 [debug] [Thread-4 (]: Finished running node test.take_home.relationships_transaction_fct_product_id__id__ref_product_dim_.cdb2761445
+[0m00:44:12.788803 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.relationships_transaction_fct_customer_id__id__ref_customer_dim_.dfd8fdd493, now test.take_home.unique_transaction_fct_transaction_id.4ff53291d7)
+[0m00:44:12.794419 [debug] [Thread-1 (]: Began running node test.take_home.not_null_agg_sales_country_country.ee336758cf
+[0m00:44:12.803469 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.relationships_transaction_fct_customer_location_id__id__ref_location_dim_.94cab4ea8e, now test.take_home.not_null_agg_sales_country_country.ee336758cf)
+[0m00:44:12.804395 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_agg_sales_country_country.ee336758cf
+[0m00:44:12.795711 [debug] [Thread-2 (]: Began compiling node test.take_home.relationships_transaction_fct_transaction_date__date__ref_date_dim_.df1d738587
+[0m00:44:12.796715 [debug] [Thread-4 (]: Began running node test.take_home.not_null_agg_sales_country_monthly_revenue.c85711553d
+[0m00:44:12.798350 [debug] [Thread-3 (]: Began compiling node test.take_home.unique_transaction_fct_transaction_id.4ff53291d7
+[0m00:44:12.822189 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_agg_sales_country_country.ee336758cf"
+[0m00:44:12.834735 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.relationships_transaction_fct_product_id__id__ref_product_dim_.cdb2761445, now test.take_home.not_null_agg_sales_country_monthly_revenue.c85711553d)
+[0m00:44:12.840018 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.relationships_transaction_fct_transaction_date__date__ref_date_dim_.df1d738587"
+[0m00:44:12.853359 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_agg_sales_country_monthly_revenue.c85711553d
+[0m00:44:12.871646 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.unique_transaction_fct_transaction_id.4ff53291d7"
+[0m00:44:12.873349 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_agg_sales_country_monthly_revenue.c85711553d"
+[0m00:44:12.874292 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_agg_sales_country_country.ee336758cf
+[0m00:44:12.874856 [debug] [Thread-2 (]: Began executing node test.take_home.relationships_transaction_fct_transaction_date__date__ref_date_dim_.df1d738587
+[0m00:44:12.875591 [debug] [Thread-3 (]: Began executing node test.take_home.unique_transaction_fct_transaction_id.4ff53291d7
+[0m00:44:12.876742 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_agg_sales_country_country.ee336758cf
+[0m00:44:12.877339 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_agg_sales_country_monthly_revenue.c85711553d
+[0m00:44:12.878717 [debug] [Thread-2 (]: Finished running node test.take_home.relationships_transaction_fct_transaction_date__date__ref_date_dim_.df1d738587
+[0m00:44:12.880866 [debug] [Thread-3 (]: Finished running node test.take_home.unique_transaction_fct_transaction_id.4ff53291d7
+[0m00:44:12.882978 [debug] [Thread-1 (]: Began running node test.take_home.not_null_agg_sales_customer_customer_id.c6c72549f8
+[0m00:44:12.884715 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_agg_sales_country_monthly_revenue.c85711553d
+[0m00:44:12.891174 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_agg_sales_country_country.ee336758cf, now test.take_home.not_null_agg_sales_customer_customer_id.c6c72549f8)
+[0m00:44:12.888993 [debug] [Thread-3 (]: Began running node test.take_home.unique_agg_sales_customer_customer_id.6d018df64f
+[0m00:44:12.894562 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_agg_sales_customer_customer_id.c6c72549f8
+[0m00:44:12.892836 [debug] [Thread-4 (]: Began running node test.take_home.not_null_agg_sales_monthly_month.a6b9f47929
+[0m00:44:12.886025 [debug] [Thread-2 (]: Began running node test.take_home.not_null_agg_sales_customer_revenue.7ddf1742c2
+[0m00:44:12.895819 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.unique_transaction_fct_transaction_id.4ff53291d7, now test.take_home.unique_agg_sales_customer_customer_id.6d018df64f)
+[0m00:44:12.905166 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_agg_sales_customer_customer_id.c6c72549f8"
+[0m00:44:12.910879 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_agg_sales_country_monthly_revenue.c85711553d, now test.take_home.not_null_agg_sales_monthly_month.a6b9f47929)
+[0m00:44:12.911880 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.take_home.relationships_transaction_fct_transaction_date__date__ref_date_dim_.df1d738587, now test.take_home.not_null_agg_sales_customer_revenue.7ddf1742c2)
+[0m00:44:12.912976 [debug] [Thread-3 (]: Began compiling node test.take_home.unique_agg_sales_customer_customer_id.6d018df64f
+[0m00:44:12.914033 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_agg_sales_monthly_month.a6b9f47929
+[0m00:44:12.914794 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_agg_sales_customer_customer_id.c6c72549f8
+[0m00:44:12.916649 [debug] [Thread-2 (]: Began compiling node test.take_home.not_null_agg_sales_customer_revenue.7ddf1742c2
+[0m00:44:12.926701 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.unique_agg_sales_customer_customer_id.6d018df64f"
+[0m00:44:12.934055 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_agg_sales_monthly_month.a6b9f47929"
+[0m00:44:12.935614 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_agg_sales_customer_customer_id.c6c72549f8
+[0m00:44:12.952720 [debug] [Thread-2 (]: Writing injected SQL for node "test.take_home.not_null_agg_sales_customer_revenue.7ddf1742c2"
+[0m00:44:12.954002 [debug] [Thread-1 (]: Began running node test.take_home.not_null_agg_sales_monthly_monthly_revenue.b02f83087b
+[0m00:44:12.955065 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_agg_sales_monthly_month.a6b9f47929
+[0m00:44:12.955780 [debug] [Thread-3 (]: Began executing node test.take_home.unique_agg_sales_customer_customer_id.6d018df64f
+[0m00:44:12.956683 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_agg_sales_customer_customer_id.c6c72549f8, now test.take_home.not_null_agg_sales_monthly_monthly_revenue.b02f83087b)
+[0m00:44:12.957275 [debug] [Thread-2 (]: Began executing node test.take_home.not_null_agg_sales_customer_revenue.7ddf1742c2
+[0m00:44:12.958507 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_agg_sales_monthly_month.a6b9f47929
+[0m00:44:12.959787 [debug] [Thread-3 (]: Finished running node test.take_home.unique_agg_sales_customer_customer_id.6d018df64f
+[0m00:44:12.960481 [debug] [Thread-1 (]: Began compiling node test.take_home.not_null_agg_sales_monthly_monthly_revenue.b02f83087b
+[0m00:44:12.962042 [debug] [Thread-2 (]: Finished running node test.take_home.not_null_agg_sales_customer_revenue.7ddf1742c2
+[0m00:44:12.963362 [debug] [Thread-4 (]: Began running node test.take_home.not_null_agg_sales_monthly_quarter.8c7f83cd84
+[0m00:44:12.964451 [debug] [Thread-3 (]: Began running node test.take_home.not_null_agg_sales_monthly_year.6eaace3ccb
+[0m00:44:12.973227 [debug] [Thread-1 (]: Writing injected SQL for node "test.take_home.not_null_agg_sales_monthly_monthly_revenue.b02f83087b"
+[0m00:44:12.974757 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.take_home.not_null_agg_sales_monthly_month.a6b9f47929, now test.take_home.not_null_agg_sales_monthly_quarter.8c7f83cd84)
+[0m00:44:12.975921 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.take_home.unique_agg_sales_customer_customer_id.6d018df64f, now test.take_home.not_null_agg_sales_monthly_year.6eaace3ccb)
+[0m00:44:12.977185 [debug] [Thread-4 (]: Began compiling node test.take_home.not_null_agg_sales_monthly_quarter.8c7f83cd84
+[0m00:44:12.977984 [debug] [Thread-3 (]: Began compiling node test.take_home.not_null_agg_sales_monthly_year.6eaace3ccb
+[0m00:44:12.978753 [debug] [Thread-1 (]: Began executing node test.take_home.not_null_agg_sales_monthly_monthly_revenue.b02f83087b
+[0m00:44:12.989077 [debug] [Thread-4 (]: Writing injected SQL for node "test.take_home.not_null_agg_sales_monthly_quarter.8c7f83cd84"
+[0m00:44:13.000212 [debug] [Thread-3 (]: Writing injected SQL for node "test.take_home.not_null_agg_sales_monthly_year.6eaace3ccb"
+[0m00:44:13.008986 [debug] [Thread-3 (]: Began executing node test.take_home.not_null_agg_sales_monthly_year.6eaace3ccb
+[0m00:44:13.007899 [debug] [Thread-4 (]: Began executing node test.take_home.not_null_agg_sales_monthly_quarter.8c7f83cd84
+[0m00:44:13.002285 [debug] [Thread-1 (]: Finished running node test.take_home.not_null_agg_sales_monthly_monthly_revenue.b02f83087b
+[0m00:44:13.010288 [debug] [Thread-3 (]: Finished running node test.take_home.not_null_agg_sales_monthly_year.6eaace3ccb
+[0m00:44:13.013760 [debug] [Thread-4 (]: Finished running node test.take_home.not_null_agg_sales_monthly_quarter.8c7f83cd84
+[0m00:44:13.030339 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m00:44:13.031105 [debug] [MainThread]: Connection 'test.take_home.not_null_agg_sales_customer_revenue.7ddf1742c2' was properly closed.
+[0m00:44:13.031698 [debug] [MainThread]: Connection 'test.take_home.not_null_agg_sales_monthly_year.6eaace3ccb' was properly closed.
+[0m00:44:13.032126 [debug] [MainThread]: Connection 'test.take_home.not_null_agg_sales_monthly_monthly_revenue.b02f83087b' was properly closed.
+[0m00:44:13.032546 [debug] [MainThread]: Connection 'test.take_home.not_null_agg_sales_monthly_quarter.8c7f83cd84' was properly closed.
+[0m00:44:13.077972 [debug] [MainThread]: Command end result
+[0m00:44:13.298700 [debug] [MainThread]: Wrote artifact WritableManifest to /usr/app/target/manifest.json
+[0m00:44:13.313225 [debug] [MainThread]: Wrote artifact SemanticManifest to /usr/app/target/semantic_manifest.json
+[0m00:44:13.328207 [debug] [MainThread]: Wrote artifact RunExecutionResult to /usr/app/target/run_results.json
+[0m00:44:13.347189 [debug] [MainThread]: Acquiring new postgres connection 'generate_catalog'
+[0m00:44:13.347709 [info ] [MainThread]: Building catalog
+[0m00:44:13.385220 [debug] [ThreadPool]: Acquiring new postgres connection 'dev.information_schema'
+[0m00:44:13.431919 [debug] [ThreadPool]: Using postgres connection "dev.information_schema"
+[0m00:44:13.434442 [debug] [ThreadPool]: On dev.information_schema: BEGIN
+[0m00:44:13.435174 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m00:44:13.446878 [debug] [ThreadPool]: SQL status: BEGIN in 0.012 seconds
+[0m00:44:13.447642 [debug] [ThreadPool]: Using postgres connection "dev.information_schema"
+[0m00:44:13.448637 [debug] [ThreadPool]: On dev.information_schema: /* {"app": "dbt", "dbt_version": "1.9.0", "profile_name": "default", "target_name": "dev", "connection_name": "dev.information_schema"} */
+
+    
+    
+
+    select
+        'dev' as table_database,
+        sch.nspname as table_schema,
+        tbl.relname as table_name,
+        case tbl.relkind
+            when 'v' then 'VIEW'
+            when 'm' then 'MATERIALIZED VIEW'
+            else 'BASE TABLE'
+        end as table_type,
+        tbl_desc.description as table_comment,
+        col.attname as column_name,
+        col.attnum as column_index,
+        pg_catalog.format_type(col.atttypid, col.atttypmod) as column_type,
+        col_desc.description as column_comment,
+        pg_get_userbyid(tbl.relowner) as table_owner
+
+    from pg_catalog.pg_namespace sch
+    join pg_catalog.pg_class tbl on tbl.relnamespace = sch.oid
+    join pg_catalog.pg_attribute col on col.attrelid = tbl.oid
+    left outer join pg_catalog.pg_description tbl_desc on (tbl_desc.objoid = tbl.oid and tbl_desc.objsubid = 0)
+    left outer join pg_catalog.pg_description col_desc on (col_desc.objoid = tbl.oid and col_desc.objsubid = col.attnum)
+    where ((upper(sch.nspname) = upper('dbt_gold') and
+           upper(tbl.relname) = upper('transaction_fct')) or (upper(sch.nspname) = upper('dbt_gold') and
+           upper(tbl.relname) = upper('product_dim')) or (upper(sch.nspname) = upper('dbt_gold') and
+           upper(tbl.relname) = upper('location_dim')) or (upper(sch.nspname) = upper('dbt_gold') and
+           upper(tbl.relname) = upper('customer_dim')) or (upper(sch.nspname) = upper('dbt_bronze') and
+           upper(tbl.relname) = upper('customer_transactions')) or (upper(sch.nspname) = upper('dbt_data_marts') and
+           upper(tbl.relname) = upper('agg_sales_customer')) or (upper(sch.nspname) = upper('dbt_silver') and
+           upper(tbl.relname) = upper('transaction')) or (upper(sch.nspname) = upper('dbt_data_marts') and
+           upper(tbl.relname) = upper('agg_sales_monthly')) or (upper(sch.nspname) = upper('dbt_gold') and
+           upper(tbl.relname) = upper('date_dim')) or (upper(sch.nspname) = upper('dbt_bronze') and
+           upper(tbl.relname) = upper('missing_quantity')) or (upper(sch.nspname) = upper('dbt_data_marts') and
+           upper(tbl.relname) = upper('agg_sales_country')))
+      and not pg_is_other_temp_schema(sch.oid) -- not a temporary schema belonging to another session
+      and tbl.relpersistence in ('p', 'u') -- [p]ermanent table or [u]nlogged table. Exclude [t]emporary tables
+      and tbl.relkind in ('r', 'v', 'f', 'p', 'm') -- o[r]dinary table, [v]iew, [f]oreign table, [p]artitioned table, [m]aterialized view. Other values are [i]ndex, [S]equence, [c]omposite type, [t]OAST table
+      and col.attnum > 0 -- negative numbers are used for system columns such as oid
+      and not col.attisdropped -- column as not been dropped
+
+    order by
+        sch.nspname,
+        tbl.relname,
+        col.attnum
+[0m00:44:13.484703 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.035 seconds
+[0m00:44:13.491115 [debug] [ThreadPool]: On dev.information_schema: ROLLBACK
+[0m00:44:13.492134 [debug] [ThreadPool]: On dev.information_schema: Close
+[0m00:44:13.520877 [debug] [MainThread]: Wrote artifact CatalogArtifact to /usr/app/target/catalog.json
+[0m00:44:13.683869 [debug] [MainThread]: Wrote artifact WritableManifest to /usr/app/target/manifest.json
+[0m00:44:13.691190 [debug] [MainThread]: Wrote artifact SemanticManifest to /usr/app/target/semantic_manifest.json
+[0m00:44:13.692058 [info ] [MainThread]: Catalog written to /usr/app/target/catalog.json
+[0m00:44:13.696119 [debug] [MainThread]: Resource report: {"command_name": "generate", "command_success": true, "command_wall_clock_time": 7.847901, "process_in_blocks": "13456", "process_kernel_time": 0.502733, "process_mem_max_rss": "116284", "process_out_blocks": "10592", "process_user_time": 8.466668}
+[0m00:44:13.697975 [debug] [MainThread]: Command `dbt docs generate` succeeded at 00:44:13.697299 after 7.85 seconds
+[0m00:44:13.698915 [debug] [MainThread]: Connection 'generate_catalog' was properly closed.
+[0m00:44:13.699529 [debug] [MainThread]: Connection 'dev.information_schema' was properly closed.
+[0m00:44:13.700859 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0ed202b980>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0e9377c440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0e9377d310>]}
+[0m00:44:13.701757 [debug] [MainThread]: Flushing usage events
+[0m00:44:14.248061 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m00:44:19.450860 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x708a7f80dac0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x708a80c89370>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x708a7f2b1ee0>]}
+
+
+============================== 00:44:19.457515 | 15a70b6d-af9f-4305-bd86-31f53ac365c5 ==============================
+[0m00:44:19.457515 [info ] [MainThread]: Running with dbt=1.9.0
+[0m00:44:19.458397 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'debug': 'False', 'log_path': '/usr/app/logs', 'profiles_dir': '/usr/app', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'static_parser': 'True', 'log_format': 'default', 'target_path': 'None', 'invocation_command': 'dbt docs serve --host 0.0.0.0 --port 8081', 'send_anonymous_usage_stats': 'True'}
+[0m00:44:19.807718 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '15a70b6d-af9f-4305-bd86-31f53ac365c5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x708a80d0fce0>]}
+[0m00:44:19.957603 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '15a70b6d-af9f-4305-bd86-31f53ac365c5', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x708a7ee52240>]}

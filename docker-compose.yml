@@ -226,6 +226,72 @@ services:
       - dbt_network
       - link_airflow_dbt_network
 
+  dbt-docs:
+    image: ghcr.io/dbt-labs/dbt-postgres:1.9.0
+    container_name: dbt-docs
+    depends_on:
+      - postgres-dbt
+      - dbt
+    # All "DBLINK_<variable>" variables are used to connect to the "data_lake" database using a Postgres DBLINK extension
+    environment:
+      - DBT_PROFILES_DIR=/usr/app
+      - POSTGRES_USER=dbt
+      - POSTGRES_PASSWORD=dbt
+      - DBLINK_HOST=postgres-dbt
+      - DBLINK_DBNAME=data_lake
+      - DBLINK_USER=dbt
+      - DBLINK_PASSWORD=dbt
+    volumes:
+      - ./dbt:/usr/app
+    working_dir: /usr/app
+    # Installs postgresql-client to check database readiness
+    # Generates dbt documentation and serves it on port 8081
+    entrypoint: >
+      bash -c "
+        apt-get update &&
+        apt-get install -y postgresql-client &&
+        echo 'Waiting for database to be ready...' &&
+        until pg_isready -h postgres-dbt -p 5432 -U dbt; do
+          echo 'Waiting for database...';
+          sleep 2;
+        done &&
+        echo 'Database is ready. Installing dbt dependencies...' &&
+        dbt deps &&
+        echo 'Generating dbt documentation...' &&
+        dbt docs generate &&
+        echo 'Starting dbt docs server on http://0.0.0.0:8081' &&
+        dbt docs serve --host 0.0.0.0 --port 8081
+      "
+    ports:
+      - "8081:8081"
+    networks:
+      - dbt_network
+      - link_airflow_dbt_network
+
+#######################################################################################################################
+####################################################### PGADMIN ######################################################
+#######################################################################################################################
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    depends_on:
+      - postgres-dbt
+      - postgres-airflow
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - dbt_network
+      - airflow_network
+      - link_airflow_dbt_network
+
 #######################################################################################################################
 ################################################ VOLUMES & NETWORKS ###################################################
 #######################################################################################################################
@@ -235,6 +301,7 @@ volumes:
   postgres_dbt_data:
   redis_data:
   dbt_ssh_keys:
+  pgadmin_data:
 
 networks:
   airflow_network:
