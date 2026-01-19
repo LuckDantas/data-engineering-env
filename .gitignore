@@ -1,6 +1,22 @@
-# Airflow logs
-airflow/logs/
+# =====================
+# Python
+# =====================
+__pycache__/
+*.py[cod]
 
-# dbt artifacts
+# =====================
+# Airflow
+# =====================
+airflow/logs/
+airflow/dags/**/__pycache__/
+
+# =====================
+# dbt
+# =====================
 dbt/target/
 dbt/logs/
+
+# =====================
+# General logs
+# =====================
+*.log

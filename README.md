@@ -1,106 +1,80 @@
-# Data Platform (Airflow + dbt + Postgres + Docker)
+# Data Engineering Environment (Airflow + dbt + Spark + Postgres + Docker)
 
-Plataforma de dados em contêineres para orquestração (Airflow), transformação (dbt) e persistência (Postgres), com observabilidade básica via dbt docs e acesso a banco via pgAdmin. Pipeline exemplo em arquitetura medallion (bronze → silver → gold → data marts).
+A containerized data platform for orchestration (Airflow), transformation (dbt), distributed processing (Spark), and persistence (Postgres). Everything is orchestrated via Docker Compose.
 
 ## Stack
 
-- Airflow (webserver, scheduler, 3 workers) com CeleryExecutor
-- Redis (broker do Celery)
-- Postgres para Airflow metadata
-- Postgres para dados (dbt) com bases `data_lake`, `dev`, `pro`
-- dbt (dbt-postgres) + dbt docs server
-- pgAdmin para acesso visual aos bancos
-- Docker Compose para orquestração local
-- CI (GitHub Actions): valida `docker-compose.yml`, DAGs, `dbt deps/parse` e smoke `dbt build --target dev`
+- **Airflow** (2.7.2): Orchestration (Webserver, Scheduler, 3 Workers) using CeleryExecutor & Redis.
+- **Spark** (PySpark): JupyterLab environment acting as a driver node for local distributed processing.
+- **dbt** (Postgres): Transformation layer with Medallion architecture (bronze → silver → gold).
+- **Postgres**:
+  - `postgres-airflow`: Metadata for Airflow.
+  - `postgres-dbt`: Data Lake storage (databases `data_lake`, `dev`, `pro`).
+- **pgAdmin**: GUI for PostgreSQL management.
+- **Docker Compose**: Local orchestration with Healthchecks.
 
-## Serviços e portas
+## Services & Ports
 
-- Airflow Web: http://localhost:8080 (user/pass: admin/admin)
-- pgAdmin: http://localhost:5050 (admin@admin.com / admin)
-- dbt docs: http://localhost:8081
-- Postgres Airflow: localhost:5433 (airflow/airflow, db airflow_db)
-- Postgres dbt: localhost:5434 (dbt/dbt, bases data_lake/dev/pro)
-- Redis: localhost:6379
-- SSH dbt container: localhost:2222 (root, chave gerada no volume)
+| Service            | URL/Port                 | Credentials (default)          |
+|--------------------|--------------------------|--------------------------------|
+| **Airflow Web**    | http://localhost:8080    | `admin` / `admin`              |
+| **Jupyter (Spark)**| http://localhost:8888    | Token: `spark`                 |
+| **Spark UI**       | http://localhost:4040    | N/A                            |
+| **pgAdmin**        | http://localhost:5050    | `admin@admin.com` / `admin`    |
+| **dbt Docs**       | http://localhost:8081    | N/A                            |
+| **Postgres Data**  | `localhost:5434`         | `dbt` / `dbt`                  |
+| **Postgres Airflow**| `localhost:5433`        | `airflow` / `airflow`          |
+| **SSH (dbt)**      | `localhost:2222`         | `root` (key volume mapped)     |
 
-## Estrutura de diretórios (principal)
+## Configuration (.env)
 
-- `airflow/dags/` — DAGs (ex.: `forex__customer_transactions__hourly.py`)
-- `airflow/logs/` — logs (ignorado no git)
-- `dbt/` — projeto dbt (modelos bronze/silver/gold/data_marts)
-- `postgres_config/` — init SQL para Postgres dbt (`init_postgres_dbt.sql`)
-- `data/` — dados de exemplo (CSV)
-- `docker-compose.yml` — orquestração dos serviços
+The project now uses a `.env` file to manage configuration. A default file is created automatically.
+Key variables:
+- `AIRFLOW_USER` / `AIRFLOW_PASSWORD`
+- `POSTGRES_DBT_USER` / `POSTGRES_DBT_PASSWORD`
+- `JUPYTER_PORT`
+- `SPARK_UI_PORT`
 
-## Subindo o ambiente
+## Quick Start
 
-```bash
-docker-compose up -d
-```
+1. **Start the environment**:
+   ```bash
+   docker-compose up -d
+   ```
+   *Note: First run takes a few minutes to download images and initialize databases.*
 
-Acessos rápidos:
-- Airflow: http://localhost:8080
-- pgAdmin: http://localhost:5050
-- dbt docs: http://localhost:8081
+2. **Access Services**:
+   - Go to **Jupyter** (http://localhost:8888) to run Spark notebooks.
+   - Go to **Airflow** (http://localhost:8080) to run DAGs.
 
-## Credenciais padrão
+3. **Stop the environment**:
+   ```bash
+   docker-compose down
+   ```
+   *To remove volumes adds `-v`*
 
-- Airflow DB: user/pass `airflow` / DB `airflow_db`
-- Postgres dbt: user/pass `dbt` / DBs `data_lake`, `dev`, `pro`
-- Airflow UI: admin / admin
-- pgAdmin: admin@admin.com / admin
+## Developing with Spark
 
-## Pipeline de exemplo (DAG FOREX__CUSTOMER_TRANSACTIONS__HOURLY)
+The `jupyter-spark` service provides a "Databricks-like" local notebook experience.
+- **Notebooks Folder**: Mapped to `./notebooks` on your host. Work saved here is persisted.
+- **Data Access**: `./data` is mapped to `/home/jovyan/data`.
+- **Postgres Connection**: Spark is on the `dbt_network`, so it can reach `postgres-dbt` at hostname `postgres-dbt`.
+  *(Note: You may need to add a JDBC driver jar to the spark classpath if reading from Postgres directly).*
 
-1) Extract: divide CSV em chunks.
-2) Load: MERGE em `data_lake.forex.customer_transactions` via Dynamic Task Mapping.
-3) Transform: `dbt deps && dbt build --target pro` via SSHOperator.
+## Project Structure
 
-## dbt
+- `airflow/`: DAGs and config.
+- `dbt/`: dbt project (Medallion architecture).
+- `notebooks/`: Spark/Python notebooks.
+- `data/`: Raw data files.
+- `postgres_config/`: Init scripts for generic Postgres setup.
+- `docker-compose.yml`: Service definition.
+- `.env`: Environment configuration.
 
-- Alvos: `dev` e `pro`; leitura de `data_lake` via dblink (variáveis `DBLINK_*`).
-- Estrutura medallion:
-  - bronze (views, leitura bruta)
-  - silver (tabelas limpas)
-  - gold (fatos/dimensões)
-  - data_marts (views de consumo)
-- Variáveis/credenciais: ver `dbt/profiles.yml` e `dbt/dbt_project.yml`.
+## CI/CD
 
-## Acesso a bancos (pgAdmin)
+GitHub Actions workflow (`CI`) validates:
+1. Docker Compose config.
+2. Airflow DAGs integrity.
+3. dbt project parsing/building (smoke test).
 
-- Host dbt: `postgres-dbt`, port 5432, user/pass `dbt`, DBs `data_lake` / `dev` / `pro`.
-- Host Airflow: `postgres-airflow`, port 5432, user/pass `airflow`, DB `airflow_db`.
-
-## dbt docs
-
-- Serviço `dbt-docs` gera e serve documentação em http://localhost:8081.
-- Comandos internos: `dbt deps && dbt docs generate && dbt docs serve --host 0.0.0.0 --port 8081`.
-
-## CI (GitHub Actions)
-
-Workflow `CI` roda em push/PR:
-- `lint_yaml_and_compose`: `docker compose -f docker-compose.yml config`
-- `airflow_dag_validation`: `python -m py_compile airflow/dags/*.py`
-- `dbt_checks`: `dbt deps && dbt parse` (override entrypoint do container)
-- `dbt_smoke_dev`: sobe `postgres-dbt`, espera `pg_isready`, roda `dbt build --target dev`, depois `docker compose down`
-
-Branch protection (configure no GitHub):
-- Exigir PR antes de merge.
-- Exigir status checks do workflow `CI`.
-- Opcional: branch up-to-date, code owners, signed commits.
-
-## Comandos úteis
-
-- Subir tudo: `docker-compose up -d`
-- Parar: `docker-compose down`
-- Parar e limpar volumes: `docker-compose down -v`
-- Logs Airflow web: `docker-compose logs -f airflow-webserver`
-- Entrar no container dbt: `docker exec -it dbt bash`
-- PSQL no Postgres dbt: `docker exec -it postgres-dbt psql -U dbt -d data_lake`
-
-## Próximos passos
-
-- Adicionar testes de dados (dbt tests ou Great Expectations).
-- Observabilidade: Prometheus/Grafana, logs centralizados.
-- Segurança: Docker secrets / vault para credenciais.
-- CI otimizado: state:modified + defer para dbt (Slim CI).

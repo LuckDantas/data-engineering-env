@@ -10,62 +10,42 @@ services:
     image: postgres:15
     container_name: postgres-airflow
     environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: airflow_db
+      POSTGRES_USER: ${AIRFLOW_USER}
+      POSTGRES_PASSWORD: ${AIRFLOW_PASSWORD}
+      POSTGRES_DB: ${AIRFLOW_DB}
     ports:
-      - "5433:5432"
+      - "${POSTGRES_AIRFLOW_PORT}:5432"
     volumes:
       - postgres_airflow_data:/var/lib/postgresql/data
     networks:
       - airflow_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${AIRFLOW_USER}", "-d", "${AIRFLOW_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
 
   airflow-webserver:
-    image: apache/airflow:2.7.2
+    image: ${AIRFLOW_IMAGE}
     container_name: airflow-webserver
     depends_on:
-      - postgres-airflow
-    # Sets the necessary environment variables for a distributed processing setup using the CeleryExecutor
+      postgres-airflow:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     environment:
       - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow:5432/airflow_db
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${AIRFLOW_USER}:${AIRFLOW_PASSWORD}@postgres-airflow:5432/${AIRFLOW_DB}
       - AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0
       - AIRFLOW__CELERY__RESULT_BACKEND=redis://redis:6379/0
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__WEBSERVER__DEFAULT_USER_USERNAME=admin
       - AIRFLOW__WEBSERVER__DEFAULT_USER_PASSWORD=admin
-    # Waits until the Airflow DB is initialized
-    # Creates an Airflow user if it doesn't exist
-    # Checks if the "dbt_conn" connection exists; otherwise, it creates it
-    # Checks if the "postgres_dbt_conn" connection exists; otherwise, it creates it
-    # Waits until the SSH keys are created in the "dbt" container
-    # Sets proper permissions for the SSH keys
-    # Starts the Airflow webserver
     command: >
       bash -c "
-      until airflow db init; do echo 'Waiting for database...'; sleep 2; done &&
-      airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin ||
-      echo 'Airflow user already exists' &&
-      if ! airflow connections get 'dbt_conn' > /dev/null 2>&1; then
-        airflow connections add 'dbt_conn' --conn-type 'ssh' --conn-host 'dbt' --conn-login 'root' --conn-port '22' --conn-extra '{\"key_file\": \"/opt/airflow/dbt_ssh_keys/id_rsa\", \"POSTGRES_USER\": \"dbt\", \"POSTGRES_PASSWORD\": \"dbt\", \"DBLINK_HOST\": \"postgres-dbt\", \"DBLINK_DBNAME\": \"data_lake\", \"DBLINK_USER\": \"dbt\", \"DBLINK_PASSWORD\": \"dbt\"}' &&
-        echo 'dbt_conn created'
-      else
-        echo 'dbt_conn already exists'
-      fi &&
-      if ! airflow connections get 'postgres_dbt_conn' > /dev/null 2>&1; then
-        airflow connections add 'postgres_dbt_conn' --conn-type 'postgres' --conn-host 'postgres-dbt' --conn-schema 'data_lake' --conn-login 'dbt' --conn-password 'dbt' --conn-port '5432' &&
-        echo 'postgres_dbt_conn created'
-      else
-        echo 'postgres_dbt_conn already exists'
-      fi &&
-      until [ -f /opt/airflow/dbt_ssh_keys/id_rsa ]; do
-        echo 'Waiting for SSH keys to be created...';
-        sleep 2;
-      done &&
-      echo 'SSH keys found, setting permissions...' &&
-      chmod 600 /opt/airflow/dbt_ssh_keys/id_rsa &&
-      airflow webserver
-      "
+      airflow db init &&
+      airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin || echo 'Airflow user already exists' &&
+      airflow webserver"
     ports:
       - "8080:8080"
     volumes:
@@ -74,76 +54,66 @@ services:
       - ./airflow/plugins:/opt/airflow/plugins
       - ./data:/opt/airflow/data
       - dbt_ssh_keys:/opt/airflow/dbt_ssh_keys
-    # Since the SSH keys created by the "dbt" container are stored in a volume located in the host machine, the containers need root access
-    # This is not recommended in a production setting
     user: root
     networks:
       - airflow_network
       - link_airflow_dbt_network
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
 
   airflow-scheduler:
-    image: apache/airflow:2.7.2
+    image: ${AIRFLOW_IMAGE}
     container_name: airflow-scheduler
     depends_on:
-      - postgres-airflow
-      - airflow-webserver
+      postgres-airflow:
+        condition: service_healthy
+      airflow-webserver:
+        condition: service_started
     environment:
       - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow:5432/airflow_db
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${AIRFLOW_USER}:${AIRFLOW_PASSWORD}@postgres-airflow:5432/${AIRFLOW_DB}
       - AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0
       - AIRFLOW__CELERY__RESULT_BACKEND=redis://redis:6379/0
-    # Waits until the Airflow DB is initialized
-    # Starts the Airflow scheduler
-    command: >
-      bash -c "
-        until airflow db init; do echo 'Waiting for database...'; sleep 2; done &&
-        airflow scheduler
-      "
+    command: airflow scheduler
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./data:/opt/airflow/data
       - dbt_ssh_keys:/opt/airflow/dbt_ssh_keys
-    # Since the SSH keys created by the "dbt" container are stored in a volume located in the host machine, the containers need root access
-    # This is not recommended in a production setting
     user: root
     networks:
       - airflow_network
       - link_airflow_dbt_network
 
   airflow-worker:
-    image: apache/airflow:2.7.2
+    image: ${AIRFLOW_IMAGE}
     depends_on:
-      - postgres-airflow
-      - airflow-scheduler
-      - redis
+      postgres-airflow:
+        condition: service_healthy
+      airflow-scheduler:
+        condition: service_started
+      redis:
+        condition: service_healthy
     environment:
       - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow:5432/airflow_db
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${AIRFLOW_USER}:${AIRFLOW_PASSWORD}@postgres-airflow:5432/${AIRFLOW_DB}
       - AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0
       - AIRFLOW__CELERY__RESULT_BACKEND=redis://redis:6379/0
-    # Waits until the Airflow DB is initialized
-    # Starts the Airflow worker node
-    command: >
-      bash -c "
-        until airflow db init; do echo 'Waiting for database...'; sleep 2; done &&
-        airflow celery worker
-      "
+    command: airflow celery worker
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./data:/opt/airflow/data
       - dbt_ssh_keys:/opt/airflow/dbt_ssh_keys
-    # Since the SSH keys created by the "dbt" container are stored in a volume located in the host machine, the containers need root access
-    # This is not recommended in a production setting
     user: root
     networks:
       - airflow_network
       - link_airflow_dbt_network
-    # Deploys 3 worker nodes for better scalability and performance
-    # Task distribution is handled by the scheduler node and Redis is used as a message broker
     deploy:
       replicas: 3
 
@@ -151,11 +121,16 @@ services:
     image: redis:7
     container_name: redis
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT}:6379"
     volumes:
     - redis_data:/data
     networks:
       - airflow_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      retries: 3
+      start_period: 5s
 
 #######################################################################################################################
 ####################################################### DBT ###########################################################
@@ -165,36 +140,27 @@ services:
     image: ghcr.io/dbt-labs/dbt-postgres:1.9.0
     container_name: dbt
     depends_on:
-      - postgres-dbt
-    # All "DBLINK_<variable>" variables are used to connect to the "data_lake" database using a Postgres DBLINK extension
+      postgres-dbt:
+        condition: service_healthy
     environment:
       - DBT_PROFILES_DIR=/usr/app
-      - POSTGRES_USER=dbt
-      - POSTGRES_PASSWORD=dbt
+      - POSTGRES_USER=${POSTGRES_DBT_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_DBT_PASSWORD}
       - DBLINK_HOST=postgres-dbt
-      - DBLINK_DBNAME=data_lake
-      - DBLINK_USER=dbt
-      - DBLINK_PASSWORD=dbt
+      - DBLINK_DBNAME=${DATA_LAKE_DB}
+      - DBLINK_USER=${POSTGRES_DBT_USER}
+      - DBLINK_PASSWORD=${POSTGRES_DBT_PASSWORD}
     volumes:
       - ./dbt:/usr/app
       - dbt_ssh_keys:/root/.ssh
     working_dir: /usr/app
-    # Updates apt-get repositories and installs a SSH server
-    # Generates SSH keys if they don't already exist
-    # Adds the public key to authorized_keys
-    # Configures SSH settings
-    # Enables "AcceptEnv" so that the DAG's SSHOperator can pass the necessary environment variables to run dbt commands
-    # Starts the SSH service
     entrypoint: >
       bash -c "
         apt-get update &&
         apt-get install -y openssh-server &&
         mkdir -p /root/.ssh &&
         if [ ! -f /root/.ssh/id_rsa ]; then
-          echo 'Generating SSH keys...';
           ssh-keygen -t rsa -b 2048 -f /root/.ssh/id_rsa -N '';
-        else
-          echo 'SSH keys already exist.';
         fi &&
         cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys &&
         sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config &&
@@ -213,60 +179,74 @@ services:
     image: postgres:15
     container_name: postgres-dbt
     environment:
-      POSTGRES_USER: dbt
-      POSTGRES_PASSWORD: dbt
-      POSTGRES_DB: dbt_db
+      POSTGRES_USER: ${POSTGRES_DBT_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_DBT_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DBT_DB}
     ports:
-      - "5434:5432"
-    # Uses the "init_postgres_dbt.sql" file to set up the required database infrastructure
+      - "${POSTGRES_DBT_PORT}:5432"
     volumes:
       - postgres_dbt_data:/var/lib/postgresql/data
       - ./postgres_config/init_postgres_dbt.sql:/docker-entrypoint-initdb.d/init_postgres_dbt.sql
     networks:
       - dbt_network
       - link_airflow_dbt_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_DBT_USER} -d ${POSTGRES_DBT_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
 
   dbt-docs:
     image: ghcr.io/dbt-labs/dbt-postgres:1.9.0
     container_name: dbt-docs
     depends_on:
-      - postgres-dbt
-      - dbt
-    # All "DBLINK_<variable>" variables are used to connect to the "data_lake" database using a Postgres DBLINK extension
+      postgres-dbt:
+        condition: service_healthy
+      dbt:
+        condition: service_started
     environment:
       - DBT_PROFILES_DIR=/usr/app
-      - POSTGRES_USER=dbt
-      - POSTGRES_PASSWORD=dbt
+      - POSTGRES_USER=${POSTGRES_DBT_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_DBT_PASSWORD}
       - DBLINK_HOST=postgres-dbt
-      - DBLINK_DBNAME=data_lake
-      - DBLINK_USER=dbt
-      - DBLINK_PASSWORD=dbt
+      - DBLINK_DBNAME=${DATA_LAKE_DB}
+      - DBLINK_USER=${POSTGRES_DBT_USER}
+      - DBLINK_PASSWORD=${POSTGRES_DBT_PASSWORD}
     volumes:
       - ./dbt:/usr/app
     working_dir: /usr/app
-    # Installs postgresql-client to check database readiness
-    # Generates dbt documentation and serves it on port 8081
     entrypoint: >
       bash -c "
-        apt-get update &&
-        apt-get install -y postgresql-client &&
-        echo 'Waiting for database to be ready...' &&
-        until pg_isready -h postgres-dbt -p 5432 -U dbt; do
-          echo 'Waiting for database...';
-          sleep 2;
-        done &&
-        echo 'Database is ready. Installing dbt dependencies...' &&
         dbt deps &&
-        echo 'Generating dbt documentation...' &&
         dbt docs generate &&
-        echo 'Starting dbt docs server on http://0.0.0.0:8081' &&
         dbt docs serve --host 0.0.0.0 --port 8081
       "
     ports:
-      - "8081:8081"
+      - "${DBT_DOCS_PORT}:8081"
     networks:
       - dbt_network
       - link_airflow_dbt_network
+
+#######################################################################################################################
+####################################################### SPARK #########################################################
+#######################################################################################################################
+
+  jupyter-spark:
+    image: jupyter/pyspark-notebook:latest
+    container_name: jupyter-spark
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=spark  # Fixed token for easy local access
+    ports:
+      - "${JUPYTER_PORT}:8888"
+      - "${SPARK_UI_PORT}:4040"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+    networks:
+      - dbt_network # To access postgres-dbt
+    user: root # To avoid permission issues with mounted volumes in some setups
+    command: start-notebook.sh --NotebookApp.token='spark'
 
 #######################################################################################################################
 ####################################################### PGADMIN ######################################################
@@ -276,15 +256,17 @@ services:
     image: dpage/pgadmin4:latest
     container_name: pgadmin
     depends_on:
-      - postgres-dbt
-      - postgres-airflow
+      postgres-dbt:
+        condition: service_healthy
+      postgres-airflow:
+        condition: service_healthy
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
       PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
     ports:
-      - "5050:80"
+      - "${PGADMIN_PORT}:80"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     networks:
