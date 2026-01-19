@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-      - "feature/**"
-      - "feat/**"
-  pull_request:
-    branches:
-      - main
 
 jobs:
   lint_yaml_and_compose:
