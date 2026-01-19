@@ -216,3 +216,27 @@ airflow.exceptions.AirflowNotFoundException: The conn_id `dbt_conn` isn't define
 [2026-01-19T00:56:40.988+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:56:40.987+0000] {dag.py:2941} INFO - Sync 1 DAGs
 [2026-01-19T00:56:41.000+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:56:41.000+0000] {dag.py:3722} INFO - Setting next_dagrun for FOREX__CUSTOMER_TRANSACTIONS__HOURLY to None, run_after=None
 [2026-01-19T00:56:41.019+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/forex__customer_transactions__hourly.py took 0.450 seconds
+[2026-01-19T00:57:11.274+0000] {processor.py:157} INFO - Started process (PID=98) to work on /opt/airflow/dags/forex__customer_transactions__hourly.py
+[2026-01-19T00:57:11.277+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/forex__customer_transactions__hourly.py for tasks to queue
+[2026-01-19T00:57:11.277+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:57:11.277+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/forex__customer_transactions__hourly.py
+[2026-01-19T00:57:11.682+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:57:11.681+0000] {base.py:73} INFO - Using connection ID 'dbt_conn' for task execution.
+[2026-01-19T00:57:11.686+0000] {processor.py:839} INFO - DAG(s) dict_keys(['FOREX__CUSTOMER_TRANSACTIONS__HOURLY']) retrieved from /opt/airflow/dags/forex__customer_transactions__hourly.py
+[2026-01-19T00:57:11.700+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:57:11.699+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2026-01-19T00:57:11.712+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:57:11.712+0000] {dag.py:3722} INFO - Setting next_dagrun for FOREX__CUSTOMER_TRANSACTIONS__HOURLY to None, run_after=None
+[2026-01-19T00:57:11.729+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/forex__customer_transactions__hourly.py took 0.463 seconds
+[2026-01-19T00:57:42.049+0000] {processor.py:157} INFO - Started process (PID=100) to work on /opt/airflow/dags/forex__customer_transactions__hourly.py
+[2026-01-19T00:57:42.052+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/forex__customer_transactions__hourly.py for tasks to queue
+[2026-01-19T00:57:42.053+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:57:42.053+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/forex__customer_transactions__hourly.py
+[2026-01-19T00:57:42.622+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:57:42.621+0000] {base.py:73} INFO - Using connection ID 'dbt_conn' for task execution.
+[2026-01-19T00:57:42.627+0000] {processor.py:839} INFO - DAG(s) dict_keys(['FOREX__CUSTOMER_TRANSACTIONS__HOURLY']) retrieved from /opt/airflow/dags/forex__customer_transactions__hourly.py
+[2026-01-19T00:57:42.646+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:57:42.646+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2026-01-19T00:57:42.660+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:57:42.660+0000] {dag.py:3722} INFO - Setting next_dagrun for FOREX__CUSTOMER_TRANSACTIONS__HOURLY to None, run_after=None
+[2026-01-19T00:57:42.685+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/forex__customer_transactions__hourly.py took 0.639 seconds
+[2026-01-19T00:58:12.948+0000] {processor.py:157} INFO - Started process (PID=102) to work on /opt/airflow/dags/forex__customer_transactions__hourly.py
+[2026-01-19T00:58:12.951+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/forex__customer_transactions__hourly.py for tasks to queue
+[2026-01-19T00:58:12.952+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:58:12.951+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/forex__customer_transactions__hourly.py
+[2026-01-19T00:58:13.397+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:58:13.397+0000] {base.py:73} INFO - Using connection ID 'dbt_conn' for task execution.
+[2026-01-19T00:58:13.402+0000] {processor.py:839} INFO - DAG(s) dict_keys(['FOREX__CUSTOMER_TRANSACTIONS__HOURLY']) retrieved from /opt/airflow/dags/forex__customer_transactions__hourly.py
+[2026-01-19T00:58:13.417+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:58:13.417+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2026-01-19T00:58:13.430+0000] {logging_mixin.py:151} INFO - [2026-01-19T00:58:13.430+0000] {dag.py:3722} INFO - Setting next_dagrun for FOREX__CUSTOMER_TRANSACTIONS__HOURLY to None, run_after=None
+[2026-01-19T00:58:13.449+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/forex__customer_transactions__hourly.py took 0.505 seconds
