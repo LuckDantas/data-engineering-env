@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - "feature/**"
+      - "feat/**"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint_yaml_and_compose:
+    name: Validate docker-compose
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate docker-compose.yml
+        run: docker compose -f docker-compose.yml config
+
+  airflow_dag_validation:
+    name: Validate Airflow DAGs (Python syntax)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check DAG Python syntax
+        run: python -m py_compile airflow/dags/*.py
+
+  dbt_checks:
+    name: dbt deps & parse
+    runs-on: ubuntu-latest
+    needs:
+      - lint_yaml_and_compose
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Pull dbt image
+        run: docker pull ghcr.io/dbt-labs/dbt-postgres:1.9.0
+
+      - name: Run dbt deps and parse (no database connection)
+        run: |
+          docker compose run --rm dbt bash -lc "dbt deps && dbt parse"
+
+  dbt_smoke_dev:
+    name: dbt smoke test (dev target)
+    runs-on: ubuntu-latest
+    needs:
+      - dbt_checks
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Start postgres-dbt
+        run: docker compose up -d postgres-dbt
+
+      - name: Wait for postgres-dbt to be ready
+        run: |
+          docker compose run --rm dbt bash -lc "
+            apt-get update &&
+            apt-get install -y postgresql-client &&
+            until pg_isready -h postgres-dbt -p 5432 -U dbt; do
+              echo 'Waiting for database...';
+              sleep 3;
+            done
+          "
+
+      - name: Run dbt build (dev target)
+        run: |
+          docker compose run --rm dbt bash -lc "
+            dbt deps &&
+            dbt build --target dev
+          "
+
+      - name: Stop services
+        if: always()
+        run: docker compose down
+

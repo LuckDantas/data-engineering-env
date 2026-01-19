@@ -1,2 +1,6 @@
 # Airflow logs
 airflow/logs/
+
+# dbt artifacts
+dbt/target/
+dbt/logs/
