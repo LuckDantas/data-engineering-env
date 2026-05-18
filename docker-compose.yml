@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   #######################################################################################################################
@@ -258,7 +256,8 @@ services:
     networks:
       - dbt_network # To access postgres-dbt
     user: root # To avoid permission issues with mounted volumes in some setups
-    command: start-notebook.sh --NotebookApp.token='spark'
+    command: >
+      bash -c "pip install delta-spark==3.2.0 && start-notebook.sh --NotebookApp.token='spark'"
 
   #######################################################################################################################
   # PGADMIN

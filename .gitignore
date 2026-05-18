@@ -19,6 +19,12 @@ dbt/dbt_packages/
 dbt/.user.yml
 
 # =====================
+# Notebooks
+# =====================
+notebooks/.ipynb_checkpoints/
+notebooks/delta-tables/
+
+# =====================
 # General logs
 # =====================
 *.log
