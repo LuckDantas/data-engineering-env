@@ -25,6 +25,11 @@ notebooks/.ipynb_checkpoints/
 notebooks/delta-tables/
 
 # =====================
+# Data (CSVs, Delta tables — too large to version)
+# =====================
+data/
+
+# =====================
 # General logs
 # =====================
 *.log
