@@ -4,18 +4,18 @@ default:
     data_lake:
       type: postgres
       host: postgres-dbt
-      user: "{{ env_var('POSTGRES_USER') }}"
-      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      user: "{{ env_var('DBLINK_USER') }}"
+      password: "{{ env_var('DBLINK_PASSWORD') }}"
       port: 5432
       dbname: data_lake
       schema: default
       threads: 4
-    
+
     dev:
       type: postgres
       host: postgres-dbt
-      user: "{{ env_var('POSTGRES_USER') }}"
-      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      user: "{{ env_var('DBLINK_USER') }}"
+      password: "{{ env_var('DBLINK_PASSWORD') }}"
       port: 5432
       dbname: dev
       schema: default
@@ -24,8 +24,8 @@ default:
     pro:
       type: postgres
       host: postgres-dbt
-      user: "{{ env_var('POSTGRES_USER') }}"
-      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      user: "{{ env_var('DBLINK_USER') }}"
+      password: "{{ env_var('DBLINK_PASSWORD') }}"
       port: 5432
       dbname: pro
       schema: default

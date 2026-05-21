@@ -14,36 +14,16 @@
 WITH source AS (
   SELECT *
   FROM dblink(
-    -- dblink is a PostgreSQL extension that allows querying a DIFFERENT database
-    -- from within a SQL statement. This is necessary because:
-    --   - dbt runs its models inside the "dev" or "pro" database
-    --   - But raw data was loaded by Airflow into the "data_lake" database
-    --   - PostgreSQL does not support cross-database queries natively
-    --
-    -- The connection string is built from dbt variables (defined in dbt_project.yml)
-    -- which read from environment variables injected by docker-compose:
-    --   dblink_host     = DBLINK_HOST     = "postgres-dbt" (container name)
-    --   dblink_dbname   = DBLINK_DBNAME   = "data_lake"
-    --   dblink_user     = DBLINK_USER     = "dbt"
-    --   dblink_password = DBLINK_PASSWORD = "dbt"
-    --
-    -- Using variables instead of hardcoded values allows the same model to run
-    -- in different environments (dev/pro) without code changes.
     'host=' || '{{ var("dblink_host") }}' ||
     ' dbname=' || '{{ var("dblink_dbname") }}' ||
     ' user=' || '{{ var("dblink_user") }}' ||
     ' password=' || '{{ var("dblink_password") }}',
 
-    -- The second argument is the SQL query executed on the REMOTE database.
-    -- Columns must be explicitly listed (no SELECT *) because dblink requires
-    -- knowing the return schema upfront to cast results correctly.
     'SELECT order_id, customer_id, order_status, order_purchase_timestamp,
             order_approved_at, order_delivered_carrier_date,
             order_delivered_customer_date, order_estimated_delivery_date
      FROM olist.orders'
 
-  -- dblink returns an anonymous record type, so we must declare each column
-  -- name and type explicitly in the AS clause.
   -- Everything is VARCHAR here because Bronze accepts data exactly as loaded —
   -- no type assumptions. Type casting happens in the Silver layer.
   ) AS remote_data(
