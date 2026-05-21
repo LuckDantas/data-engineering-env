@@ -54,7 +54,7 @@ jobs:
           docker compose run --rm --entrypoint bash dbt -lc "dbt deps && dbt parse"
 
   dbt_smoke_dev:
-    name: dbt smoke test (dev target)
+    name: dbt compile (dev target)
     runs-on: ubuntu-latest
     needs:
       - dbt_checks
@@ -69,22 +69,14 @@ jobs:
       - name: Start postgres-dbt
         run: docker compose up -d postgres-dbt
 
-      - name: Wait for postgres-dbt to be ready
-        run: |
-          docker compose run --rm --entrypoint bash dbt -lc "
-            apt-get update &&
-            apt-get install -y postgresql-client &&
-            until pg_isready -h postgres-dbt -p 5432 -U dbt; do
-              echo 'Waiting for database...';
-              sleep 3;
-            done
-          "
-
-      - name: Run dbt build (dev target)
+      - name: Compile dbt models (no data required)
+        # dbt compile renders all Jinja/SQL and validates references between
+        # models without executing queries. dbt build requires real source
+        # data (loaded by the Airflow DAG) which does not exist in CI.
         run: |
           docker compose run --rm --entrypoint bash dbt -c "
             dbt deps &&
-            dbt build --target dev --threads 1
+            dbt compile --target dev
           "
 
       - name: Stop services
