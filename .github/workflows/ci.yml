@@ -82,9 +82,9 @@ jobs:
 
       - name: Run dbt build (dev target)
         run: |
-          docker compose run --rm --entrypoint bash dbt -lc "
+          docker compose run --rm --entrypoint bash dbt -c "
             dbt deps &&
-            dbt build --target dev
+            dbt build --target dev --threads 1
           "
 
       - name: Stop services
