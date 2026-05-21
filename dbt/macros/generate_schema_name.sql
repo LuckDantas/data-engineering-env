@@ -8,7 +8,7 @@
   
   {% set node_path = node.path %}
   {% set path_parts = node_path.split('/') %}
-  {% set node_dir = path_parts[-2] %}
+  {% set node_dir = path_parts[0] %}
   
   {% if environment == 'pro' %}
     {{ node_dir }}
