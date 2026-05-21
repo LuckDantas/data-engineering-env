@@ -59,7 +59,7 @@ Right-click on "Servers" → "Register" → "Server"
 Once connected to the DBT Database, you can explore:
 
 1. **data_lake database:**
-   - `forex.customer_transactions` - Raw transaction data
+   - `olist.*` - Raw Olist e-commerce tables (loaded by Airflow)
 
 2. **dev database:**
    - `dev.bronze.*` - Bronze layer models (views)

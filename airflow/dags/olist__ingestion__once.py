@@ -168,7 +168,7 @@ def olist_pipeline():
             schema="olist",
             # if_exists="replace": drops and recreates the table on each run.
             # Safe for a one-time historical load. For incremental loads you
-            # would use "append" or implement MERGE logic (like the forex DAG).
+            # would use "append" or implement MERGE logic for incremental loads.
             if_exists="replace",
             index=False,    # don't write the DataFrame index as a column
             method="multi", # insert multiple rows per statement (faster than one-by-one)
@@ -198,7 +198,7 @@ def olist_pipeline():
     #   non-interactive shell doesn't source environment variables automatically.
     #
     # --select tag:olist: runs only models tagged with 'olist' (set in
-    #   dbt_project.yml), skipping unrelated models like the forex pipeline.
+    #   dbt_project.yml), skipping models from other pipelines.
     # -------------------------------------------------------------------------
     dbt_conn_extra = {}
     try:
