@@ -15,7 +15,7 @@ WITH source AS (
   SELECT *
   FROM dblink(
     -- Same dblink connection pattern used across all Bronze models.
-    -- See olist_orders.sql for full explanation of why dblink is needed.
+    -- See olist_category_translation.sql for full explanation of why dblink is needed.
     'host=' || '{{ var("dblink_host") }}' ||
     ' dbname=' || '{{ var("dblink_dbname") }}' ||
     ' user=' || '{{ var("dblink_user") }}' ||

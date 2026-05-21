@@ -15,16 +15,22 @@
 WITH source AS (
   SELECT *
   FROM dblink(
-    -- dblink_host    → "postgres-dbt" (the PostgreSQL container name)
-    -- dblink_dbname  → "data_lake"    (where Airflow loaded the CSVs)
-    -- dblink_user    → "dbt"
-    -- dblink_password → "dbt"
+    -- dblink is a PostgreSQL extension that allows querying a DIFFERENT database
+    -- from within a SQL statement. This is necessary because:
+    --   - dbt runs its models inside the "dev" or "pro" database
+    --   - But raw data was loaded by Airflow into the "data_lake" database
+    --   - PostgreSQL does not support cross-database queries natively
+
     -- These values come from environment variables set in docker-compose.yml,
     -- read by dbt_project.yml via env_var(), and passed here as dbt vars.
     'host=' || '{{ var("dblink_host") }}' ||
     ' dbname=' || '{{ var("dblink_dbname") }}' ||
     ' user=' || '{{ var("dblink_user") }}' ||
     ' password=' || '{{ var("dblink_password") }}',
+
+    -- The second argument is the SQL query executed on the REMOTE database.
+    -- Columns must be explicitly listed (no SELECT *) because dblink requires
+    -- knowing the return schema upfront to cast results correctly.
 
     'SELECT product_category_name, product_category_name_english
      FROM olist.category_translation'
