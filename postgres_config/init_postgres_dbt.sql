@@ -10,25 +10,7 @@ CREATE DATABASE pro;
 
 SET timezone = 'UTC';
 
-CREATE SCHEMA IF NOT EXISTS forex;
-
-CREATE TABLE IF NOT EXISTS forex.customer_transactions (
-    transaction_id VARCHAR(20) PRIMARY KEY,
-    customer_id FLOAT,
-    transaction_date VARCHAR(20),
-    product_id VARCHAR(20),
-    product_name VARCHAR(100),
-    quantity FLOAT,
-    price VARCHAR(20),
-    tax VARCHAR(20),
-    customer_first_name VARCHAR(100),
-    customer_last_name VARCHAR(100),
-    customer_email VARCHAR(100),
-    customer_phone VARCHAR(100),
-    customer_country VARCHAR(100),
-    customer_city VARCHAR(100),
-    load_timestamp TIMESTAMP
-);
+CREATE SCHEMA IF NOT EXISTS olist;
 
 \c dev;
 

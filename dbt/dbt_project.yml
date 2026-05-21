@@ -19,18 +19,26 @@ models:
     bronze:
       +schema: bronze
       +materialized: view
+      olist:
+        +tags: ['olist']
 
     silver:
       +schema: silver
       +materialized: table
+      olist:
+        +tags: ['olist']
 
     gold:
       +schema: gold
       +materialized: table
-    
+      olist:
+        +tags: ['olist']
+
     data_marts:
       +schema: data_marts
       +materialized: view
+      olist:
+        +tags: ['olist']
 
 model-paths: ["models"]
 analysis-paths: ["analysis"]
