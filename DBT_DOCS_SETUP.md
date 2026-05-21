@@ -58,23 +58,35 @@ Você verá a seguinte estrutura:
 
 ```
 📁 Bronze (Views)
-  └── customer_transactions
-  └── missing_quantity
+  └── olist_orders
+  └── olist_customers
+  └── olist_products
+  └── olist_sellers
+  └── olist_order_items
+  └── olist_order_payments
+  └── olist_order_reviews
+  └── olist_geolocation
+  └── olist_category_translation
 
 📁 Silver (Tables)
-  └── transaction
+  └── stg_olist_orders
+  └── stg_olist_customers
+  └── stg_olist_products
+  └── stg_olist_sellers
+  └── stg_olist_order_items
 
 📁 Gold (Tables)
-  └── customer_dim
+  └── fct_pedidos
+  └── dim_clientes_olist
+  └── dim_produtos_olist
+  └── dim_vendedores_olist
   └── date_dim
-  └── location_dim
-  └── product_dim
-  └── transaction_fct
 
 📁 Data Marts (Views)
-  └── agg_sales_country
-  └── agg_sales_customer
-  └── agg_sales_monthly
+  └── agg_olist_vendas_mensais
+  └── agg_olist_vendas_por_estado
+  └── agg_olist_vendas_por_categoria
+  └── agg_olist_satisfacao_vendedor
 ```
 
 ## Dicas
