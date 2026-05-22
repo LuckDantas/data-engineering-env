@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: agg_weather_monthly
+    description: Monthly weather summary per city — one row per (month, city).
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [month, city]
+    columns:
+      - name: month
+        description: First day of the month (DATE)
+        tests:
+          - not_null
+
+      - name: city
+        description: City name
+        tests:
+          - not_null
+
+      - name: total_rain_mm
+        description: Total precipitation for the month (mm)
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 15000
+
+      - name: days_recorded
+        description: Number of days with data in this month
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 31
+
+  - name: agg_weather_by_city
+    description: All-time weather summary per city — one row per city.
+    columns:
+      - name: city
+        description: City name
+        tests:
+          - not_null
+          - unique
+
+      - name: pct_rainy_days
+        description: Percentage of days with precipitation > 1mm
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100
+
+      - name: days_recorded
+        description: Total number of days with data
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 3660

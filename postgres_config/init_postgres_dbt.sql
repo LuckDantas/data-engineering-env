@@ -1,5 +1,5 @@
 -- Creates three databases: "data_lake", "dev" and "pro"
--- Creates the schema "olist" in the "data_lake" database as the landing zone for raw data
+-- Creates schemas "olist" and "weather" in "data_lake" as landing zones for raw data
 -- Creates the function "Word2Number" to convert number words (e.g. "Two Hundred" or "fifteen") to numeric digits (e.g. 200 or 15). This will be used in our silver model
 
 CREATE DATABASE data_lake;
@@ -11,6 +11,7 @@ CREATE DATABASE pro;
 SET timezone = 'UTC';
 
 CREATE SCHEMA IF NOT EXISTS olist;
+CREATE SCHEMA IF NOT EXISTS weather;
 
 \c dev;
 

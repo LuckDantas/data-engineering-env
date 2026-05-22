@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: stg_weather_daily
+    description: Cleaned and typed daily weather data. One row per (city, date). Surrogate key on weather_sk.
+    columns:
+      - name: weather_sk
+        description: Surrogate key — MD5 hash of (city, date)
+        tests:
+          - not_null
+          - unique
+
+      - name: city
+        description: City name
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - "São Paulo"
+                - "Rio de Janeiro"
+                - "Belo Horizonte"
+                - "Curitiba"
+                - "Porto Alegre"
+                - "Fortaleza"
+                - "Salvador"
+                - "Manaus"
+                - "Recife"
+                - "Brasília"
+
+      - name: date
+        description: Date of the observation
+        tests:
+          - not_null
+
+      - name: temperature_2m_max
+        description: Maximum temperature at 2m height (°C)
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -10
+              max_value: 50
+
+      - name: temperature_2m_min
+        description: Minimum temperature at 2m height (°C)
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -15
+              max_value: 45
+
+      - name: temperature_range
+        description: Daily temperature swing (max - min, °C)
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 40
+
+      - name: precipitation_sum
+        description: Total daily precipitation (mm)
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 600
+
+      - name: wind_speed_10m_max
+        description: Maximum wind speed at 10m height (km/h)
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 200
