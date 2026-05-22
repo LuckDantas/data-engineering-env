@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: weather_daily
+    description: Raw daily weather data fetched from Open-Meteo via dblink. All values are in their original types — no casting applied.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [city, date]
+    columns:
+      - name: city
+        description: City name
+        tests:
+          - not_null
+
+      - name: date
+        description: Date of the observation (YYYY-MM-DD string from the API)
+        tests:
+          - not_null

@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: fct_weather_daily
+    description: Gold fact table for daily weather observations with derived metrics (daylight_hours, is_rainy_day, heat_category).
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [city, date]
+    columns:
+      - name: weather_sk
+        description: Surrogate key — MD5 hash of (city, date)
+        tests:
+          - not_null
+          - unique
+
+      - name: city
+        description: City name
+        tests:
+          - not_null
+
+      - name: date
+        description: Date of the observation
+        tests:
+          - not_null
+
+      - name: temperature_2m_max
+        description: Maximum temperature (°C)
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -10
+              max_value: 50
+
+      - name: is_rainy_day
+        description: True when precipitation_sum > 1mm
+        tests:
+          - accepted_values:
+              values: [true, false]
+
+      - name: heat_category
+        description: Temperature bucket for BI filtering
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - "Extreme Heat"
+                - "Hot"
+                - "Warm"
+                - "Mild"
+                - "Cold"
+
+      - name: daylight_hours
+        description: Hours between sunrise and sunset
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 10
+              max_value: 14

@@ -21,24 +21,32 @@ models:
       +materialized: view
       olist:
         +tags: ['olist']
+      weather:
+        +tags: ['weather']
 
     silver:
       +schema: silver
       +materialized: table
       olist:
         +tags: ['olist']
+      weather:
+        +tags: ['weather']
 
     gold:
       +schema: gold
       +materialized: table
       olist:
         +tags: ['olist']
+      weather:
+        +tags: ['weather']
 
     data_marts:
       +schema: data_marts
       +materialized: view
       olist:
         +tags: ['olist']
+      weather:
+        +tags: ['weather']
 
 model-paths: ["models"]
 analysis-paths: ["analysis"]
